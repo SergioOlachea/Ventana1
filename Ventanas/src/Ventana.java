@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class Ventana extends JFrame {
     private JTextField pantallaCal;
@@ -17,10 +19,10 @@ public class Ventana extends JFrame {
 		this.setSize(1000,1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		//this.add(this.login());
+		this.add(this.login());
 		//this.add(this.ventanaRegistro());
 		//this.add(this.Calculadora());
-		this.add(this.Tabla());
+		//this.add(this.Tabla());
 		this.repaint();
     }
     public JPanel Calculadora() {
@@ -130,4 +132,85 @@ public class Ventana extends JFrame {
         return tabla;
     }
 
+public JPanel login() {
+		
+		JPanel login=new JPanel();
+		login.setSize(450, 225);
+		login.setLocation(150, 150);
+		login.setBackground(new Color( 255, 255, 204));
+		login.setVisible(true);
+		login.setLayout(null);
+		login.setOpaque(true);
+		Border borde = new LineBorder(Color.DARK_GRAY, 2, true); // Color, Grosor, Esquinas redondeadas
+	    login.setBorder(borde);
+	    
+	    
+	    ImageIcon icono = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/nike-logo-wallpaper1red.jpg");
+	    JLabel lblImagen = new JLabel(icono);
+	    lblImagen.setOpaque(true); // Habilita la opacidad para que el color de fondo sea visible
+	    lblImagen.setBackground(new Color(50, 50, 50));	    
+	    lblImagen.setBounds(20, 20, 150, 150); // Posicionar la imagen a la izquierda
+	
+	    login.add(lblImagen);
+
+	   
+	    int formX = 180;
+        
+
+	    Font fuente = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+
+		JLabel lbletiqueta1= new JLabel("REGISTRO");
+		lbletiqueta1.setSize(100,15);
+		lbletiqueta1.setLocation(formX + 30, 20);
+		lbletiqueta1.setBackground(Color.DARK_GRAY);
+		lbletiqueta1.setFont(fuente);
+		lbletiqueta1.setOpaque(false);
+		lbletiqueta1.setHorizontalAlignment(SwingConstants.CENTER);;
+
+		int centerLabelX = (login.getWidth() - lbletiqueta1.getWidth()) / 2;
+	    lbletiqueta1.setLocation(centerLabelX, 20); // Y fija, X centrada
+	    login.add(lbletiqueta1);
+		
+		JLabel lblcorreo= new JLabel("E-mail");
+		lblcorreo.setSize(100,20);
+		lblcorreo.setLocation(formX, 60);
+		lblcorreo.setBackground(Color.DARK_GRAY);
+		lblcorreo.setOpaque(false);
+		login.add(lblcorreo);
+		
+		JTextField txtcorreot = new JTextField();
+		txtcorreot.setSize(150,25);
+		txtcorreot.setLocation(formX + 70, 60);
+		txtcorreot.setBackground(Color.WHITE);
+		txtcorreot.setForeground(Color.BLACK);
+		txtcorreot.setOpaque(true);
+		login.add(txtcorreot);
+		
+		JLabel lblcontraseña= new JLabel("Contraseña");
+		lblcontraseña.setSize(100,20);
+		lblcontraseña.setLocation(formX, 100);
+		lblcontraseña.setBackground(Color.DARK_GRAY);
+		lblcontraseña.setOpaque(false);
+		login.add(lblcontraseña);
+		
+		JPasswordField contra = new JPasswordField();
+		contra.setSize(150,25);
+		contra.setLocation(formX + 70, 100);
+		contra.setBackground(Color.WHITE);
+		contra.setForeground(Color.BLACK);
+		contra.setOpaque(true);
+		login.add(contra);
+		
+		JButton btnIngresar= new JButton ("Ingresar");
+		btnIngresar.setSize(150,40);
+		btnIngresar.setLocation(formX + 35, 150);
+		btnIngresar.setBackground(new Color(173, 216, 230));
+		btnIngresar.setForeground(Color.BLACK);
+		btnIngresar.setOpaque(true);
+		Border bordebtn = new LineBorder(Color.DARK_GRAY, 4, true); // Color, Grosor, Esquinas redondeadas
+	    btnIngresar.setBorder(bordebtn);
+	    
+		login.add(btnIngresar);
+		return login;
+	}
 }
