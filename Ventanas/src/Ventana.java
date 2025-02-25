@@ -6,6 +6,7 @@ import javax.swing.border.LineBorder;
 public class Ventana extends JFrame {
     private JTextField pantallaCal;
     private JButton[] botones;
+    JMenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9;
     private String[] etiquetas = {
             "7", "8", "9", "/",
             "4", "5", "6", "*",
@@ -15,18 +16,75 @@ public class Ventana extends JFrame {
 
     public Ventana() {
     	this.setTitle(getTitle());
-		this.setVisible(true);
 		this.setSize(1000,1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.add(this.login());
+		this.setContentPane(new FondoDegradado());
+       
+        this.setVisible(true);
 		//this.add(this.ventanaRegistro());
 		//this.add(this.Calculadora());
 		//this.add(this.Tabla());
-		this.repaint();
+        
+        //Crear barra
+        JMenuBar barra = new JMenuBar(); 
+        // Crear menús
+        JMenu menu = new JMenu("Archivo");  
+        JMenu menu2 = new JMenu("Ayuda");  
+
+         // Crear elementos de menú
+         item1 = new JMenuItem("Guardar");  
+         item2 = new JMenuItem("Nuevo");  
+         item3 = new JMenuItem("Eliminar");  
+         item4 = new JMenuItem("Compartir");
+         
+         item5 = new JMenuItem("Buscar");  
+         item6 = new JMenuItem("Consejos");  
+         item7 = new JMenuItem("Contenido de ayuda");  
+        
+
+
+         // Añadir elementos al menú
+         menu.add(item1);  
+         menu.add(item2);  
+         menu.add(item3);
+         
+         menu2.add(item5);  
+         menu2.add(item6);  
+         menu2.add(item7);
+
+         
+ 		
+        
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(500, 450));
+
+        // Panel de fondo con degradado
+        FondoDegradado fondo = new FondoDegradado();
+        fondo.setBounds(0, 0, 1000, 1000);
+
+        //this.add(this.login());
+        
+
+        // Agregamos los componentes al layeredPane
+        layeredPane.add(fondo, JLayeredPane.DEFAULT_LAYER);
+        layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
+
+        // Agregamos el layeredPane al JFrame
+        this.setContentPane(layeredPane);
+        this.setVisible(true);
+         
+
+        barra.add(menu);
+        barra.add(menu2);
+        this.setJMenuBar(barra);
+        this.repaint();
+        this.revalidate();
+        
     }
     public JPanel Calculadora() {
 
+    	
     	JPanel calculadora =new JPanel();
         setTitle("Calculadora");
         setSize(350, 500);
@@ -132,85 +190,71 @@ public class Ventana extends JFrame {
         return tabla;
     }
 
-public JPanel login() {
-		
-		JPanel login=new JPanel();
-		login.setSize(450, 225);
-		login.setLocation(150, 150);
-		login.setBackground(new Color( 255, 255, 204));
-		login.setVisible(true);
-		login.setLayout(null);
-		login.setOpaque(true);
-		Border borde = new LineBorder(Color.DARK_GRAY, 2, true); // Color, Grosor, Esquinas redondeadas
-	    login.setBorder(borde);
-	    
-	    
-	    ImageIcon icono = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/nike-logo-wallpaper1red.jpg");
-	    JLabel lblImagen = new JLabel(icono);
-	    lblImagen.setOpaque(true); // Habilita la opacidad para que el color de fondo sea visible
-	    lblImagen.setBackground(new Color(50, 50, 50));	    
-	    lblImagen.setBounds(20, 20, 150, 150); // Posicionar la imagen a la izquierda
+	public JPanel login() {
+			
+			JPanel login=new JPanel();
+			login.setBounds(170, 170, 500, 500);
+	        login.setLayout(null);
+	        login.setOpaque(true);
+	        login.setBackground(new Color (255, 255, 153));
+			login.setBorder(new LineBorder(Color.WHITE, 2, true)); // Color, Grosor, Esquinas redondeadas
 	
-	    login.add(lblImagen);
+		    
+		    
+		    ImageIcon iconoLogo = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/nike-logo-wallpaper1red.jpg");
+	        JLabel lblLogo = new JLabel(iconoLogo);
+	        lblLogo.setBounds(120, 20, 150, 94);
+	        login.add(lblLogo);
+	
+	        // Iconos para usuario y contraseña
+	        ImageIcon iconUser = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/user-icon.png");
+	        ImageIcon iconPass = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/lock-icon.png");
+	
+	        // Campo usuario con icono
+	        JLabel lblIconUser = new JLabel(iconUser);
+	        lblIconUser.setBounds(50, 130, 30, 30);
+	        login.add(lblIconUser);
+	
+	        JTextField txtUsuario = new JTextField();
+	        txtUsuario.setBounds(90, 130, 250, 30);
+	        txtUsuario.setFont(new Font("Arial", Font.PLAIN, 14));
+	        login.add(txtUsuario);
+	
+	        // Campo contraseña con icono
+	        JLabel lblIconPass = new JLabel(iconPass);
+	        lblIconPass.setBounds(50, 180, 30, 30);
+	        login.add(lblIconPass);
+	
+	        JPasswordField txtPassword = new JPasswordField();
+	        txtPassword.setBounds(90, 180, 250, 30);
+	        txtPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+	        login.add(txtPassword);
+	
+	        // Botón de ingresar estilizado
+	        JButton btnIngresar = new JButton("Ingresar");
+	        btnIngresar.setBounds(120, 240, 160, 40);
+	        btnIngresar.setFont(new Font("Arial", Font.BOLD, 14));
+	        btnIngresar.setForeground(Color.BLACK);
+	        btnIngresar.setBorder(new LineBorder(Color.GRAY, 2, true));
+	        btnIngresar.setFocusPainted(false);
+	        btnIngresar.setBorder(new Redondeo (40));
+	        login.add(btnIngresar);
+	
+	        return login;
+			
+		}
 
-	   
-	    int formX = 180;
-        
-
-	    Font fuente = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
-
-		JLabel lbletiqueta1= new JLabel("REGISTRO");
-		lbletiqueta1.setSize(100,15);
-		lbletiqueta1.setLocation(formX + 30, 20);
-		lbletiqueta1.setBackground(Color.DARK_GRAY);
-		lbletiqueta1.setFont(fuente);
-		lbletiqueta1.setOpaque(false);
-		lbletiqueta1.setHorizontalAlignment(SwingConstants.CENTER);;
-
-		int centerLabelX = (login.getWidth() - lbletiqueta1.getWidth()) / 2;
-	    lbletiqueta1.setLocation(centerLabelX, 20); // Y fija, X centrada
-	    login.add(lbletiqueta1);
-		
-		JLabel lblcorreo= new JLabel("E-mail");
-		lblcorreo.setSize(100,20);
-		lblcorreo.setLocation(formX, 60);
-		lblcorreo.setBackground(Color.DARK_GRAY);
-		lblcorreo.setOpaque(false);
-		login.add(lblcorreo);
-		
-		JTextField txtcorreot = new JTextField();
-		txtcorreot.setSize(150,25);
-		txtcorreot.setLocation(formX + 70, 60);
-		txtcorreot.setBackground(Color.WHITE);
-		txtcorreot.setForeground(Color.BLACK);
-		txtcorreot.setOpaque(true);
-		login.add(txtcorreot);
-		
-		JLabel lblcontraseña= new JLabel("Contraseña");
-		lblcontraseña.setSize(100,20);
-		lblcontraseña.setLocation(formX, 100);
-		lblcontraseña.setBackground(Color.DARK_GRAY);
-		lblcontraseña.setOpaque(false);
-		login.add(lblcontraseña);
-		
-		JPasswordField contra = new JPasswordField();
-		contra.setSize(150,25);
-		contra.setLocation(formX + 70, 100);
-		contra.setBackground(Color.WHITE);
-		contra.setForeground(Color.BLACK);
-		contra.setOpaque(true);
-		login.add(contra);
-		
-		JButton btnIngresar= new JButton ("Ingresar");
-		btnIngresar.setSize(150,40);
-		btnIngresar.setLocation(formX + 35, 150);
-		btnIngresar.setBackground(new Color(173, 216, 230));
-		btnIngresar.setForeground(Color.BLACK);
-		btnIngresar.setOpaque(true);
-		Border bordebtn = new LineBorder(Color.DARK_GRAY, 4, true); // Color, Grosor, Esquinas redondeadas
-	    btnIngresar.setBorder(bordebtn);
-	    
-		login.add(btnIngresar);
-		return login;
-	}
 }
+
+
+class FondoDegradado extends JPanel {
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        GradientPaint gp = new GradientPaint(0, 0, new Color(0, 102, 204), 0, getHeight(), new Color(0, 51, 102));
+        g2d.setPaint(gp);
+        g2d.fillRect(0, 0, getWidth(), getHeight());
+    }
+}
+
