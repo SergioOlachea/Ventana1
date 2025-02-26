@@ -8,10 +8,11 @@ public class Ventana extends JFrame {
     private JButton[] botones;
     JMenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9;
     private String[] etiquetas = {
+    		"C", " ", " ", " ",
             "7", "8", "9", "/",
             "4", "5", "6", "*",
             "1", "2", "3", "-",
-            "C", "0", "=", "+"
+            ".", "0", "=", "+"
     };
 
     public Ventana() {
@@ -23,7 +24,7 @@ public class Ventana extends JFrame {
        
         this.setVisible(true);
 		//this.add(this.ventanaRegistro());
-		//this.add(this.Calculadora());
+		this.add(Calculadora());
 		//this.add(this.Tabla());
         
         //Crear barra
@@ -42,8 +43,6 @@ public class Ventana extends JFrame {
          item6 = new JMenuItem("Consejos");  
          item7 = new JMenuItem("Contenido de ayuda");  
         
-
-
          // Añadir elementos al menú
          menu.add(item1);  
          menu.add(item2);  
@@ -57,18 +56,21 @@ public class Ventana extends JFrame {
  		
         
         JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(500, 450));
+        layeredPane.setPreferredSize(new Dimension(500, 500));
 
         // Panel de fondo con degradado
         FondoDegradado fondo = new FondoDegradado();
         fondo.setBounds(0, 0, 1000, 1000);
 
         //this.add(this.login());
+        this.add(this.Calculadora());
         
 
         // Agregamos los componentes al layeredPane
         layeredPane.add(fondo, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(Calculadora(), JLayeredPane.PALETTE_LAYER);
+       // layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
+        
 
         // Agregamos el layeredPane al JFrame
         this.setContentPane(layeredPane);
@@ -86,10 +88,13 @@ public class Ventana extends JFrame {
 
     	
     	JPanel calculadora =new JPanel();
-        setTitle("Calculadora");
-        setSize(350, 500);
-        setLayout(null);
-        setLocationRelativeTo(null);
+    	setTitle("Calculadora");
+        calculadora.setBounds(300, 170, 350, 460);
+        calculadora.setLayout(null);
+    	calculadora.setOpaque(true);
+    	calculadora.setBorder(new LineBorder(Color.BLACK, 3, true));
+    	calculadora.setBackground(new Color (105,105,105));
+        
 
         // Inicializar display
         pantallaCal = new JTextField("0");
@@ -97,15 +102,17 @@ public class Ventana extends JFrame {
         pantallaCal.setFont(new Font("Arial", Font.BOLD, 24));
         pantallaCal.setHorizontalAlignment(JTextField.RIGHT);
         pantallaCal.setEditable(false);
-        add(pantallaCal);
+        pantallaCal.setVisible(true);
+        pantallaCal.setBorder(new LineBorder(Color.BLACK, 3, true));
+        
 
         // Panel de botones
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(4, 4, 5, 5));
+        panel.setLayout(new GridLayout(5, 4, 5, 5));
         panel.setBounds(20, 90, 300, 350);
 
-        botones = new JButton[16];
-        for (int i = 0; i < 16; i++) {
+        botones = new JButton[20];
+        for (int i = 0; i < 20; i++) {
             botones[i] = new JButton(etiquetas[i]);
             botones[i].setFont(new Font("Arial", Font.BOLD, 18));
             botones[i].setFocusPainted(false);
@@ -118,11 +125,14 @@ public class Ventana extends JFrame {
             } else {
                 botones[i].setBackground(Color.ORANGE);
                 botones[i].setForeground(Color.BLACK);
+                
             }
+            botones[i].setBorder(new LineBorder(Color.BLACK, 3, true));
             panel.add(botones[i]);
         }
-        panel.add(calculadora);
-
+        calculadora.add(pantallaCal);
+        calculadora.add(panel);
+        setVisible(true);
         return calculadora;
        
     }

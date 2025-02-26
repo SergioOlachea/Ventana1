@@ -11,7 +11,7 @@ class Redondeo implements Border {
 
     Redondeo(int radio) {
         this.radio = radio;
-        this.color = new Color(30, 144, 255);
+        this.color = new Color(169,169,169);
     }
 
     public Insets getBorderInsets(Component c) {
