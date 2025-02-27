@@ -63,12 +63,14 @@ public class Ventana extends JFrame {
         fondo.setBounds(0, 0, 1000, 1000);
 
         //this.add(this.login());
-        this.add(this.Calculadora());
+        //this.add(this.Calculadora());
+        this.add(this.CalculadoraInteres());
         
 
         // Agregamos los componentes al layeredPane
         layeredPane.add(fondo, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(Calculadora(), JLayeredPane.PALETTE_LAYER);
+        //layeredPane.add(Calculadora(), JLayeredPane.PALETTE_LAYER);
+        layeredPane.add(CalculadoraInteres(), JLayeredPane.PALETTE_LAYER);
        // layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
         
 
@@ -254,6 +256,116 @@ public class Ventana extends JFrame {
 			
 		}
 
+	public JPanel CalculadoraInteres() {
+		JPanel p = new JPanel();
+		
+		JPanel calculadora =new JPanel();
+		calculadora.setBounds(150, 170, 600, 500);
+        calculadora.setLayout(new BorderLayout(50,50));
+    	calculadora.setOpaque(true);
+    	calculadora.setBorder(new LineBorder(Color.BLACK, 3, true));
+    	
+    	 JLabel lblcal = new JLabel("Calculando el Interés", SwingConstants.CENTER);
+         lblcal.setFont(new Font("Arial", Font.BOLD, 18));
+         lblcal.setForeground(Color.BLACK);
+         calculadora.add(lblcal, BorderLayout.NORTH);
+
+         //Panel superior
+         JPanel interes = new JPanel(new GridBagLayout());
+         interes.setBackground(new Color(144, 238, 144)); 
+         interes.setBorder(new LineBorder(Color.BLACK, 2, true));
+         
+         //uso de grid layout para mayor facilidad de organizacion
+         GridBagConstraints c = new GridBagConstraints();
+         c.insets = new Insets(20, 1, 5, 1);
+         c.fill = GridBagConstraints.HORIZONTAL;
+         
+
+         JLabel lblTitulo = new JLabel("Calcular Interés", SwingConstants.CENTER);
+         lblTitulo.setFont(new Font("Arial", Font.BOLD, 14));
+         c.gridx = 0; c.gridy = 0;
+         interes.add(lblTitulo, c);
+
+         JLabel lblCapital = new JLabel("Capital:", SwingConstants.CENTER);
+         c.gridx = 0; c.gridy = 1;
+         interes.add(lblCapital, c);
+         
+         JTextField txtCapital = new JTextField(20);
+         c.gridx = 1;
+         interes.add(txtCapital, c);
+         
+         JLabel lblTiempo = new JLabel("Tiempo:", SwingConstants.CENTER);
+         c.gridx = 0; c.gridy = 2;
+         interes.add(lblTiempo, c);
+         
+         JTextField txtTiempo = new JTextField(20);
+         c.gridx = 1;
+         interes.add(txtTiempo, c);
+         
+         JLabel lblTasaInt = new JLabel("Tasa Interés:", SwingConstants.CENTER);
+         c.gridx = 0; c.gridy = 3;
+         interes.add(lblTasaInt, c);
+         
+         JTextField txtTasaInt = new JTextField(20);
+         c.gridx = 1;
+         interes.add(txtTasaInt, c);
+
+       
+         //Panel Exclusivo para botones para facilitar su acomodo
+         JPanel panelBotones = new JPanel(new FlowLayout());
+         panelBotones.setBackground(new Color(144, 238, 144));
+
+         JButton btnCalcular = new JButton("Calcular");
+         btnCalcular.setPreferredSize(new Dimension(150, 30));
+         btnCalcular.setIcon(new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Calcular.jpeg"));
+         panelBotones.add(btnCalcular);
+
+         JButton btnCancelar = new JButton("Cancelar");
+     	 btnCancelar.setPreferredSize(new Dimension(150, 30));
+         btnCancelar.setIcon(new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Cancelar.jpeg"));
+         panelBotones.add(btnCancelar);
+
+         c.gridwidth = 2;
+         c.gridx = 0; c.gridy = 4;
+         interes.add(panelBotones, c);
+         
+         
+      // Panel de resultados
+         JPanel footer = new JPanel(new GridBagLayout());
+         footer.setBackground(new Color(255, 160, 122)); // Rojo claro
+         footer.setBorder(new LineBorder(Color.BLACK, 2, true));
+
+         GridBagConstraints d = new GridBagConstraints();
+         d.insets = new Insets(5, 10, 5, 10);
+         d.fill = GridBagConstraints.HORIZONTAL;
+         
+
+         JLabel lblInteres = new JLabel("Interés:", SwingConstants.CENTER);
+         
+         d.gridx = 0; d.gridy = 0;
+         footer.add(lblInteres, d);
+         
+         JTextField txtInteres = new JTextField(20);
+         
+         d.gridx = 1;
+         footer.add(txtInteres, d);
+
+         JLabel lblMonto = new JLabel("Monto:", SwingConstants.CENTER);
+         
+         d.gridx = 0; d.gridy = 1;
+         footer.add(lblMonto, d);
+         
+         JTextField txtMonto = new JTextField(20);
+         
+         d.gridx = 1;
+         footer.add(txtMonto, d);
+
+         // Agregar paneles
+         calculadora.add(interes, BorderLayout.CENTER);
+         calculadora.add(footer, BorderLayout.SOUTH);
+
+         return calculadora;
+	}
 }
 
 
