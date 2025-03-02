@@ -1,5 +1,8 @@
+package Aplcicacion;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -7,6 +10,7 @@ public class Ventana extends JFrame {
     private JTextField pantallaCal;
     private JButton[] botones;
     JMenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9;
+    ImageIcon icono = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/icono.png");
     private String[] etiquetas = {
     		"C", " ", " ", " ",
             "7", "8", "9", "/",
@@ -16,6 +20,8 @@ public class Ventana extends JFrame {
     };
 
     public Ventana() {
+    	
+    	this.setIconImage(icono.getImage());
     	this.setTitle(getTitle());
 		this.setSize(1000,1000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
