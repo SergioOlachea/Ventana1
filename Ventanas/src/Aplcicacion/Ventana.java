@@ -1,10 +1,13 @@
 package Aplcicacion;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
@@ -33,9 +36,10 @@ public class Ventana extends JFrame {
        
         this.setVisible(true);
 		//this.add(this.ventanaRegistro());
-		this.add(Calculadora());
+		//this.add(Calculadora());
 		//this.add(this.Tabla());
         
+		
         //Crear barra
         JMenuBar barra = new JMenuBar(); 
         // Crear menús
@@ -73,13 +77,13 @@ public class Ventana extends JFrame {
 
         //this.add(this.login());
         //this.add(this.Calculadora());
-        this.add(this.CalculadoraInteres());
+       // this.add(this.CalculadoraInteres());
         
 
         // Agregamos los componentes al layeredPane
         layeredPane.add(fondo, JLayeredPane.DEFAULT_LAYER);
         //layeredPane.add(Calculadora(), JLayeredPane.PALETTE_LAYER);
-        layeredPane.add(CalculadoraInteres(), JLayeredPane.PALETTE_LAYER);
+        //layeredPane.add(CalculadoraInteres(), JLayeredPane.PALETTE_LAYER);
        // layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
         
 
@@ -266,6 +270,7 @@ public class Ventana extends JFrame {
 		}
 
 	public JPanel CalculadoraInteres() {
+
 		JPanel p = new JPanel();
 		
 		JPanel calculadora =new JPanel();
@@ -325,7 +330,7 @@ public class Ventana extends JFrame {
          panelBotones.setBackground(new Color(144, 238, 144));
 
          JButton btnCalcular= new JButton("Calcular");
-         btnCalcular.addMouseListener(new Click());
+         //btnCalcular.addMouseListener(new Click());
          btnCalcular.setPreferredSize(new Dimension(150, 30));
          btnCalcular.setIcon(new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Calcular.jpeg"));
          panelBotones.add(btnCalcular);
@@ -377,28 +382,76 @@ public class Ventana extends JFrame {
         
 
          return calculadora;
-        class Click extends MouseAdapter{
+	}
+     
+	/*  class Click extends MouseAdapter{
+
 		public void mouseClicked(MouseEvent event) {
 			click++;
 			txtMonto.setText(String.valueOf(click));
 		}
 		int click=0;
 	}
+	
+	}*/
+
+	public void paint (Graphics g) {
+		super.paint(g);
+		
+		Graphics2D g2 = (Graphics2D) g;
+		
+		
+		g2.setColor(Color.MAGENTA);
+		g2.drawRect(80,80,400,400);//crea el contorno de un cuadro
+		
+		g2.fillRect(200,200,200,200);//dibuja un cuadro y lo pone del color seleccionado
+		
+		g2.clearRect(100,100,50,50);//Limpiar una zona
+		
+		g2.fillRoundRect(500,80,200,200,30,30);
+		
+		g2.setColor(Color.BLACK);
+		g2.setStroke(new BasicStroke(10));
+		g2.drawLine(10,10,500,500);
+		
+		g2.setColor(new Color (255, 255, 153));
+		g2.drawOval(600,600,90,90);
+		
+		g2.drawArc(600,200,200,200,0,-180);
+		g2.setColor(Color.RED);
+		g2.fillArc(600,200,200,200,0,180);
+		
+		g2.setColor(Color.BLACK);
+		g2.setFont(new Font("Arial", Font.BOLD, 24));
+		g2.drawString("HOLA", 250,100);
+		
+		BufferedImage imagen;
+		try {
+			imagen = ImageIO.read(new File("C:/Users/smari/git/PracticaVentana/Ventanas/src/Aplcicacion/hedgehog.png"));
+			g2.drawImage(imagen, 800,250,100,100,Color.gray,null);
+		}catch (IOException e ) {
+			e.printStackTrace();
+		}
+		
+		int[] xs= {100,167,400};
+		int [] ys = {200,500,400};
+		g2.drawPolygon(xs,ys,3);
+		g2.fillPolygon(xs,ys,4);
 	}
 	
-	
-}
 
 
 
-class FondoDegradado extends JPanel {
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        GradientPaint gp = new GradientPaint(0, 0, new Color(0, 102, 204), 0, getHeight(), new Color(0, 51, 102));
-        g2d.setPaint(gp);
-        g2d.fillRect(0, 0, getWidth(), getHeight());
-    }
+
+	class FondoDegradado extends JPanel {
+	    @Override
+	    protected void paintComponent(Graphics g) {
+	        super.paintComponent(g);
+	        Graphics2D g2d = (Graphics2D) g;
+	        GradientPaint gp = new GradientPaint(0, 0, new Color(0, 102, 204), 0, getHeight(), new Color(0, 51, 102));
+	        g2d.setPaint(gp);
+	        g2d.fillRect(0, 0, getWidth(), getHeight());
+	    }
+	}
 }
 

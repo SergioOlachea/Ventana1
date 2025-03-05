@@ -196,11 +196,11 @@ public class Ventana1 extends JFrame {
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		ImageIcon icono1 = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/usuarioOculto.jpeg");
-		ImageIcon icono2 = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Usuario.jpeg");
+		ImageIcon icono1 = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/usuarioOculto.jpg");
+		ImageIcon icono2 = new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Usuario.jpg");
         JLabel usuario = new JLabel(icono1);
         usuario.setBorder(new LineBorder(Color.BLACK, 2, true));
-        usuario.setBounds(101, 21, 199, 144);
+        usuario.setBounds(117, 21, 167, 144);
 		panel_2.add(usuario);
 		
 		
