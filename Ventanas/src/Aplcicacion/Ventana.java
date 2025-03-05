@@ -1,6 +1,9 @@
 package Aplcicacion;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 
 import javax.swing.border.Border;
@@ -321,7 +324,8 @@ public class Ventana extends JFrame {
          JPanel panelBotones = new JPanel(new FlowLayout());
          panelBotones.setBackground(new Color(144, 238, 144));
 
-         JButton btnCalcular = new JButton("Calcular");
+         JButton btnCalcular= new JButton("Calcular");
+         btnCalcular.addMouseListener(new Click());
          btnCalcular.setPreferredSize(new Dimension(150, 30));
          btnCalcular.setIcon(new ImageIcon("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Calcular.jpeg"));
          panelBotones.add(btnCalcular);
@@ -369,10 +373,22 @@ public class Ventana extends JFrame {
          // Agregar paneles
          calculadora.add(interes, BorderLayout.CENTER);
          calculadora.add(footer, BorderLayout.SOUTH);
+         
+        
 
          return calculadora;
+        class Click extends MouseAdapter{
+		public void mouseClicked(MouseEvent event) {
+			click++;
+			txtMonto.setText(String.valueOf(click));
+		}
+		int click=0;
 	}
+	}
+	
+	
 }
+
 
 
 class FondoDegradado extends JPanel {
