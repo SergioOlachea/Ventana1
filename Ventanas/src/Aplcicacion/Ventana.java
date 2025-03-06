@@ -401,42 +401,124 @@ public class Ventana extends JFrame {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		
-		g2.setColor(Color.MAGENTA);
-		g2.drawRect(80,80,400,400);//crea el contorno de un cuadro
-		
-		g2.fillRect(200,200,200,200);//dibuja un cuadro y lo pone del color seleccionado
-		
-		g2.clearRect(100,100,50,50);//Limpiar una zona
-		
-		g2.fillRoundRect(500,80,200,200,30,30);
-		
-		g2.setColor(Color.BLACK);
-		g2.setStroke(new BasicStroke(10));
-		g2.drawLine(10,10,500,500);
-		
-		g2.setColor(new Color (255, 255, 153));
-		g2.drawOval(600,600,90,90);
-		
-		g2.drawArc(600,200,200,200,0,-180);
-		g2.setColor(Color.RED);
-		g2.fillArc(600,200,200,200,0,180);
-		
-		g2.setColor(Color.BLACK);
-		g2.setFont(new Font("Arial", Font.BOLD, 24));
-		g2.drawString("HOLA", 250,100);
-		
-		BufferedImage imagen;
+		// Fondo cielo
+	    g2.setColor(Color.CYAN);
+	    g2.fillRect(0, 0, getWidth(), getHeight());
+
+	    // Pasto y tierra
+	    g2.setColor(new Color(139, 69, 19)); 
+	    g2.fillRect(0, getHeight() - 100, getWidth(), 100);
+	    g2.setColor(new Color(34, 139, 34)); 
+	    g2.fillRect(0, getHeight() - 130, getWidth(), 30);
+
+	    // Cerco 
+	    g2.setColor(new Color(130, 52, 5));
+	    g2.setStroke(new BasicStroke(80));
+	    g2.drawLine(120, 700, 900, 700);
+	    g2.setColor(new Color(139, 69, 19)); 
+	    for (int i = 0; i < 30; i += 3) {
+	        int x = 80 + i * 30;  
+	        int[] xc = {x, x + 26, x + 71};  
+	        int[] yc = {605, 550, 605};  
+	        g2.fillPolygon(xc, yc, 3);  
+	        g2.fillRect(x, 605, 70, 150);  
+	    }
+	   
+
+	    // Paredes de la casa
+	    g2.setColor(Color.YELLOW);
+	    g2.fillRect(150, 555, 300, 200);
+	    
+	    // Chimenea 
+	    g2.setColor(Color.GRAY);
+	    g2.fillRect(350, 470, 55, 80); 
+	    g2.fillRect(360, 470, 30, 20); 
+	    g2.setColor(Color.DARK_GRAY);
+	    g2.fillRect(345, 450, 65, 20);
+	    
+	    // Techo 
+	    g2.setColor(Color.RED);
+	    int[] xt = {120, 300, 470};
+	    int[] yt = {555, 470, 555};
+	    g2.fillPolygon(xt, yt, 3);
+
+	    // Ventana con divisiones en cruz
+	    g2.setColor(Color.WHITE);
+	    g2.fillRect(180, 620, 60, 60);
+	    g2.setColor(Color.BLACK);
+	    g2.setStroke(new BasicStroke(3));
+	    g2.drawLine(210, 620, 210, 680);
+	    g2.drawLine(180, 650, 240, 650);
+	    g2.setColor(Color.GRAY);
+	    g2.setStroke(new BasicStroke(2));
+	    g2.drawRect(180, 620, 60, 60);
+	    g2.setColor(Color.BLACK);
+	    g2.setStroke(new BasicStroke(4));
+	    g2.drawLine(180, 680, 242, 680);
+	    
+
+	    // Puerta 
+	    g2.setColor(Color.BLACK);
+	    g2.setStroke(new BasicStroke(3));
+	    g2.drawRect(260, 634, 80, 121);
+	    g2.setColor(new Color(139, 69, 19));
+	    g2.fillRect(260, 635, 80, 120);
+	    g2.setColor(Color.BLACK);
+	    g2.fillOval(330, 689, 10, 10); 
+	    
+	 // Sol 
+        g2.setColor(Color.YELLOW);
+        g2.fillOval(50, 50, 100, 100); 
+        g2.setColor(Color.BLACK);
+        g2.fillOval(75, 75, 15, 15); 
+        g2.fillOval(110, 75, 15, 15); 
+        g2.drawArc(80, 90, 40, 30, 0, -180);
+        g2.setColor(Color.YELLOW);
+        g2.drawLine(100, 30, 100, 10);  
+        g2.drawLine(100, 170, 100, 190); 
+        g2.drawLine(30, 100, 10, 100);  
+        g2.drawLine(170, 100, 190, 100);
+        g2.drawLine(40, 40, 20, 20);  
+        g2.drawLine(160, 40, 180, 20);  
+        g2.drawLine(40, 160, 20, 180);  
+        g2.drawLine(160, 160, 180, 180); 
+        
+        g2.setColor(Color.WHITE);
+
+	     // Nubes
+	     g2.fillOval(100, 100, 60, 40);
+	     g2.fillOval(130, 90, 70, 50);
+	     g2.fillOval(170, 100, 60, 40);
+	     g2.fillOval(400, 80, 70, 50);
+	     g2.fillOval(440, 70, 90, 60);
+	     g2.fillOval(490, 80, 70, 50);
+	     g2.fillOval(700, 120, 60, 40);
+	     g2.fillOval(730, 110, 70, 50);
+	     g2.fillOval(770, 120, 60, 40);
+
+
+        // Árbol 
+        int arbolX = 650;
+        g2.setColor(new Color(139, 90, 19)); 
+        g2.fillRect(arbolX, 550, 50, 210); // Tronco
+        g2.setColor(Color.GRAY);
+        g2.drawRect(arbolX, 550, 50, 210);
+        g2.setColor(new Color(34, 139, 34)); 
+        g2.fillOval(arbolX - 30, 460, 110, 100); // Copa del árbol
+        g2.fillOval(arbolX - 30, 540, 110, 100);
+        g2.fillOval(arbolX  - 1 , 500, 110, 100); //derecha
+        g2.fillOval(arbolX - 80, 500, 110, 100);//izquierda
+
+        BufferedImage imagen;
 		try {
-			imagen = ImageIO.read(new File("C:/Users/smari/git/PracticaVentana/Ventanas/src/Aplcicacion/hedgehog.png"));
-			g2.drawImage(imagen, 800,250,100,100,Color.gray,null);
+			imagen = ImageIO.read(new File("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/familia_transparente.png"));
+			//imagen.setRGB(arbolX, arbolX, arbolX);
+			g2.drawImage(imagen, 420,630,300,150,null);
 		}catch (IOException e ) {
 			e.printStackTrace();
 		}
 		
-		int[] xs= {100,167,400};
-		int [] ys = {200,500,400};
-		g2.drawPolygon(xs,ys,3);
-		g2.fillPolygon(xs,ys,4);
+		
 	}
 	
 
