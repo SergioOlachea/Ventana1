@@ -99,6 +99,220 @@ public class Ventana extends JFrame {
         this.revalidate();
         
     }
+    
+    /*g2.setColor(Color.BLACK);
+    g2.setStroke(new BasicStroke(2));
+    g2.drawLine(340, 110, 340, 160);*/
+    public void paint (Graphics g) {
+    	
+		super.paint(g);
+		
+		Graphics2D g2 = (Graphics2D) g;
+	    int pixel = 7;  
+
+		
+		// Fondo cielo
+	    g2.setColor(Color.decode("#b3eefe"));
+	    g2.fillRect(0, 0, getWidth(), getHeight());
+	    for (int y = 0; y < getHeight(); y += pixel) {
+	        for (int x = 0; x < getWidth(); x += pixel) {
+	            if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#b3eefe"));
+	            } else {
+	                g2.setColor(Color.decode("#a0d8f0"));
+	            }
+	            g2.fillRect(x, y, pixel, pixel);
+	        }
+	    }
+
+	    // Pasto y tierra
+	    
+	    g2.setColor(Color.decode("#e7996b")); 
+	    g2.fillRect(0, getHeight() - 100, getWidth(), 100);
+	    g2.setColor(Color.decode("#fdc6b5")); 
+	    g2.fillRect(0, getHeight() - 130, getWidth(), 30);
+	    
+	    for (int y = getHeight() - 100; y < getHeight() - 30; y += pixel) {
+	        for (int x = 0; x < getWidth(); x += pixel) {
+	            if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#e7996b"));
+	            } else {
+	                g2.setColor(Color.decode("#f3b59a"));
+	            }
+	            g2.fillRect(x, y, pixel, pixel);
+	        }
+	    }
+	    
+	    for (int y = getHeight() - 130; y < getHeight() - 100; y += pixel) {
+	        for (int x = 0; x < getWidth(); x += pixel) {
+	            if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#fdc6b5"));
+	            } else {
+	                g2.setColor(Color.decode("#e8a899"));
+	            }
+	            g2.fillRect(x, y, pixel, pixel);
+	        }
+	    }
+	    g2.setColor(Color.BLACK);
+	    g2.setStroke(new BasicStroke(3));
+	    g2.drawRect(0, getHeight() - 130, getWidth(), 30);
+	    
+	    // bloques
+	    // azul
+	    g2.setColor(Color.BLACK);
+	    g2.fillRoundRect(420, 527, 160, 225,9,9);
+	    g2.setStroke(new BasicStroke(8));
+	    g2.drawRoundRect(400, 507, 160, 245,9,9);
+	    g2.setColor(Color.decode("#84c0ff") );
+	    g2.fillRoundRect(400, 507, 160, 245,9,9);
+	    g2.setColor(Color.decode("#1e8fde")); 
+	    g2.fillRect(400, 507 + 235, 160, 10); 
+	    g2.fillRect(400 + 150, 507, 10, 245);
+	    for (int y = 507; y < 507 + 230; y += pixel) {
+	        for (int x = 400; x < 400 + 142; x += pixel) {
+	        	if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#a1c8f7")); 
+	            } else {
+	                g2.setColor(Color.decode("#84c0ff")); 
+	            }
+	            g2.fillRect(x, y, 10, 10); 
+	        }
+	    } 
+	    g2.setColor(Color.GRAY); 
+	    int tornillo = 10;
+	    g2.fillOval(410 - tornillo / 2, 517 - tornillo / 2, tornillo, tornillo); 
+	    g2.fillOval(390 + 160 - tornillo / 2, 517 - tornillo / 2, tornillo, tornillo);
+	    g2.fillOval(390 + 160 - tornillo / 2, 497 + 245 - tornillo / 2, tornillo, tornillo); 
+	    
+	    
+	    // amarillo
+	    g2.setColor(Color.BLACK);
+	    g2.fillRoundRect(345, 632, 155, 120,8,8);
+	    g2.drawRoundRect(330, 609, 150, 145,8,8);
+	    g2.setColor(Color.decode("#ffc3b8"));
+	    g2.fillRoundRect(330, 609, 150, 145,8,8);
+	    g2.setColor(Color.decode("#f2986e")); 
+	    g2.fillRect(330, 609 + 135, 150, 10);
+	    g2.fillRect(330 + 140, 609, 10, 145);
+	    g2.setColor(Color.decode("#51d96b"));
+	    g2.fillRoundRect(850, 609, 150, 145,8,8);
+	    for (int y = 609; y < 609 + 130; y += pixel) {
+	        for (int x = 330; x < 330 + 140; x += pixel) {
+	        	if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#ffc3b8")); 
+	            } else {
+	                g2.setColor(Color.decode("#e9b3a9"));
+	            }
+	            g2.fillRect(x, y, 10, 10); 
+	        }
+	    } 
+	    g2.setColor(Color.GRAY);
+	    g2.fillOval(340 - tornillo / 2, 619 - tornillo / 2, tornillo, tornillo); 
+	    g2.fillOval(320 + 150 - tornillo / 2, 619 - tornillo / 2, tornillo, tornillo); 
+	    g2.fillOval(320 + 150 - tornillo / 2, 599 + 145 - tornillo / 2, tornillo, tornillo); 
+	    g2.fillOval(340 - tornillo / 2, 599 + 145 - tornillo / 2, tornillo, tornillo);
+	    
+	    BufferedImage imagen1;
+ 		try {
+ 			imagen1 = ImageIO.read(new File("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Captura_de_pantalla_8-3-2025_103937_www.bing.com-removebg-preview.png"));
+ 			g2.drawImage(imagen1, 520, 660,85,90,null,null);
+ 		}catch (IOException e ) {
+ 			e.printStackTrace();
+ 		}
+	    
+	    
+	    g2.setColor(Color.BLACK);
+	    g2.setStroke(new BasicStroke(8));
+	    g2.drawRoundRect(850, 609, 150, 145,5,5);
+	    g2.setColor(Color.decode("#257f2e"));
+	    g2.fillRect(850, 609 + 135, 150, 10);
+	    for (int y = 609; y < 609 + 131; y += pixel) {
+	        for (int x = 850; x < 850 + 140; x += pixel) {
+	            if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#51d96b"));
+	            } else {
+	                g2.setColor(Color.decode("#48aa5b"));
+	            }
+	            g2.fillRect(x, y, pixel, pixel);
+	        }
+	    }
+	    g2.setColor(Color.GRAY); 
+	    g2.fillOval(860 - tornillo / 2, 619- tornillo / 2, tornillo, tornillo); 
+	    g2.fillOval(860 - tornillo / 2, 599 + 145 - tornillo / 2, tornillo, tornillo);   
+	    
+	    // tubo
+	    g2.setColor(Color.decode("#1b851c") );
+	    g2.fillRect(700, 632, 95, 120);
+	    g2.fillRect(695, 580, 105,50);
+	    g2.setColor(Color.decode("#54d96f"));
+	    g2.fillRect(708,632,3,120);
+	    g2.fillRect(705,580, 5,50);//
+	    g2.fillRect(712,632,10,120);
+	    g2.fillRect(712,580, 10,50);//
+	    g2.fillRect(730,632,3,120);
+	    g2.fillRect(728,580, 3,50);//
+	    g2.fillRect(757,632, 6,120);
+	    g2.fillRect(760,580, 3,50);
+	    g2.setColor(Color.BLACK);
+	    g2.fillRect(760,632, 3,120);
+	    g2.fillRect(763,580, 5,50);//
+	    g2.fillRect(770,632, 3,120);
+	    g2.fillRect(770,580, 3,50);//
+	    g2.fillRect(775,632,10,120);
+	    g2.fillRect(778,580, 10,50);//
+	    g2.fillRect(790,632,5,120);
+	    g2.fillRect(792,580, 7,50);//
+	    g2.setStroke(new BasicStroke(3));
+	    g2.drawRect(695, 580, 105,50);
+	    g2.drawRect(700, 632, 95, 120);
+	    
+	    BufferedImage imagen;
+ 		try {
+ 			imagen = ImageIO.read(new File("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Captura_de_pantalla_8-3-2025_103628_enlinea2025-1.uabcs.mx-removebg-preview.png"));
+ 			g2.drawImage(imagen, 695, 480,100,100,null,null);
+ 		}catch (IOException e ) {
+ 			e.printStackTrace();
+ 		}
+	    
+	 // Lucky Blocks
+	    g2.setColor(Color.BLACK);
+	    g2.fillRoundRect(150, 410, 50, 50, 5, 5); 
+	    g2.setStroke(new BasicStroke(6));
+	    g2.drawRoundRect(140, 400, 50, 50, 5, 5);
+	    g2.setColor(Color.decode("#ffb600"));
+	    g2.fillRoundRect(140, 400, 50, 50, 5, 5);
+	    g2.setColor(Color.decode("#e59400"));
+	    g2.fillRect(140, 400, 50, 10);
+	    g2.fillRect(140, 400, 10, 50);
+	    g2.setColor(Color.BLACK);
+	    g2.fillRoundRect(420, 430, 105, 50, 5, 5); 
+	    g2.setStroke(new BasicStroke(6));
+	    g2.drawRoundRect(410, 420, 105, 50, 5, 5);
+	    g2.setColor(Color.WHITE);
+	    g2.setFont(new Font("Arial", Font.BOLD, 30)); // Fuente y tamaño
+	    g2.drawString("?", 155, 435);
+	    g2.setColor(Color.decode("#ffb600"));
+	    g2.fillRoundRect(410, 420, 105, 50, 5, 5);
+	    g2.setColor(Color.decode("#e59400"));
+	    g2.fillRect(410, 420, 105, 10);
+	    g2.fillRect(410, 420, 10, 50);
+	    g2.fillRect(460, 420, 10, 50);
+	    int centrox = 410 + (105 / 2);
+	    g2.setColor(Color.BLACK);
+	    g2.drawLine(centrox, 420, centrox, 470);
+	    g2.setColor(Color.BLACK);
+	    g2.fillRoundRect(890, 490, 50, 50, 5, 5); 
+	    g2.setStroke(new BasicStroke(6));
+	    g2.drawRoundRect(880, 480, 50, 50, 5, 5);
+	    g2.setColor(Color.decode("#ffb600"));
+	    g2.fillRoundRect(880, 480, 50, 50, 5, 5);
+	    g2.setColor(Color.decode("#e59400"));
+	    g2.fillRect(880, 480, 50, 10);
+	    g2.fillRect(880, 480, 10, 50);
+	    
+	    
+    }
+    
     public JPanel Calculadora() {
 
     	
@@ -395,7 +609,7 @@ public class Ventana extends JFrame {
 	
 	}*/
 
-	public void paint (Graphics g) {
+	/*public void paint (Graphics g) {
 		super.paint(g);
 		
 		Graphics2D g2 = (Graphics2D) g;
@@ -519,7 +733,7 @@ public class Ventana extends JFrame {
 		}
 		
 		
-	}
+	}*/
 	
 
 
