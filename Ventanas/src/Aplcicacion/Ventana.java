@@ -100,18 +100,249 @@ public class Ventana extends JFrame {
         
     }
     
-    /*g2.setColor(Color.BLACK);
-    g2.setStroke(new BasicStroke(2));
-    g2.drawLine(340, 110, 340, 160);*/
-    public void paint (Graphics g) {
+  public void paint (Graphics g) {
     	
 		super.paint(g);
 		
 		Graphics2D g2 = (Graphics2D) g;
 	    int pixel = 7;  
+	    
+	 // Fondo cielo
+	    g2.setColor(Color.decode("#b3eefe"));
+	    g2.fillRect(0, 0, getWidth(), getHeight());
+	    for (int y = 0; y < getHeight(); y += pixel) {
+	        for (int x = 0; x < getWidth(); x += pixel) {
+	            if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#0665c0"));
+	            } else {
+	                g2.setColor(Color.decode("#096ecf"));
+	            }
+	            g2.fillRect(x, y, pixel, pixel);
+	        }
+	    }
 
-		
-		// Fondo cielo
+	    g2.setColor(Color.decode("#bddade"));
+	    g2.fillRoundRect(320, 700, 200, 50,50,50);
+	    g2.fillRoundRect(290, 600, 200, 50,50,50);
+	    g2.fillRoundRect(185, 650, 200, 50,50,50);
+	    g2.fillRoundRect(645, 400, 200, 50,50,50);
+	    g2.setColor(Color.WHITE);
+	    g2.fillRoundRect(320, 700, 200, 42,50,50);
+	    g2.fillRoundRect(290, 600, 200, 42,50,50);
+	    g2.fillRoundRect(185, 650, 200, 42,50,50);
+	    g2.fillRoundRect(645, 400, 200, 42,50,50);
+	    
+	    // Sombra Montañas
+	    g2.setColor(Color.decode("#a8cfce"));
+	    g2.fillRect(385, 402, 180, 350);
+	    g2.fillArc(385, 302, 180, 200, 0, 180);//
+	    g2.fillRect(566, 252, 180, 500);
+	    g2.fillArc(566, 152, 180, 200, 0, 180);//
+	    g2.fillRect(50, 402, 180, 350);
+	    g2.fillArc(50, 302, 180, 200, 0, 180);//
+	    
+	    // Montañas mas lejanas
+	    g2.setColor(Color.decode("#c6e3e7"));
+	    g2.fillRect(385, 402, 160, 340);
+	    g2.fillArc(385, 302, 160, 200, 0, 180);//
+	    g2.fillRect(566, 252, 160, 500);
+	    g2.fillArc(566, 152, 160, 200, 0, 180);//
+	    g2.fillRect(50, 402, 160, 350);
+	    g2.fillArc(50, 302, 160, 200, 0, 180);//
+	    
+	    //brillos
+	    g2.setColor(Color.decode("#f1f4ff"));
+	    g2.fillOval(410, 460, 20, 30);
+		g2.fillOval(475, 405, 25, 32);
+		g2.fillOval(410, 560, 20, 30);
+		g2.fillOval(70, 550, 20, 30);
+		g2.fillOval(150, 400, 26, 32);
+		g2.fillOval(150, 530, 22, 32);
+		g2.fillOval(590, 340, 22, 38);
+		g2.fillOval(670, 240, 20, 34);
+
+		    
+		//nubes
+	    g2.setColor(Color.decode("#bddade"));
+	    g2.fillRoundRect(500, 550, 200, 50,50,50);
+	    g2.fillRoundRect(230, 500, 200, 50,50,50);
+	    g2.setColor(Color.WHITE);
+	    g2.fillRoundRect(500, 550, 200, 42,50,50);
+	    g2.fillRoundRect(230, 500, 200, 42,50,50);
+	    
+	    // Sombras Montañas Cercanas
+	    g2.setColor(Color.decode("#2b6a94"));
+	    g2.fillRect(385, 678,220, 75);
+	    g2.fillArc(385, 598, 220, 180, 0, 180);
+	    g2.fillRect(605, 540,220, 213);
+	    g2.fillArc(605, 450, 220, 180, 0, 180);
+	    g2.fillRect(-110, 657,220, 95);
+	    g2.fillArc(-110, 582, 220, 150, 0, 180);
+	    
+	    // Montañas mas cercanas
+	    g2.setStroke(new BasicStroke(7));
+	    g2.drawRect(385, 678,220, 75);
+	    g2.drawArc(385, 598, 220, 180, 0, 180);
+	    g2.drawRect(605, 540,220, 213);
+	    g2.drawArc(605, 450, 220, 180, 0, 180);
+	    g2.drawRect(-110, 657,220, 95);
+	    g2.drawArc(-110, 582, 220, 150, 0, 180);
+	    g2.setColor(Color.decode("#77b3d8"));
+	    g2.fillRect(385, 678,200, 75);
+	    g2.fillArc(385, 598, 200, 180, 0, 180);//
+	    g2.fillRect(607, 540,200, 213);
+	    g2.fillArc(607, 450, 200, 180, 0, 180);//
+	    g2.fillRect(-110, 657,200, 95);
+	    g2.fillArc(-110, 582, 200, 150, 0, 180);//
+	    g2.setColor(Color.decode("#bddade"));
+	    g2.fillRoundRect(-25, 450, 200, 50,50,50);
+	    g2.fillRoundRect(745, 350, 200, 50,50,50);
+	    g2.setColor(Color.WHITE);
+	    g2.fillRoundRect(-25, 450, 200, 42,50,50);
+	    g2.fillRoundRect(745, 350, 200, 42,50,50);
+	    
+	    //Brillos
+	    g2.setColor(Color.decode("#c6e4e5"));
+		g2.fillOval(650, 510, 20, 30);
+		g2.fillOval(730, 600, 24, 36);
+		 
+	    
+	    // tubo
+	    g2.setColor(Color.decode("#8884d1") );
+	    g2.fillRect(450, 652, 95, 100);
+	    g2.fillRoundRect(442, 602, 111,50,10,10);
+	    // Brillo del tubo 
+	    g2.setColor(Color.decode("#46438f"));
+	    g2.fillRect(455,652,3,100);
+	    g2.fillRect(452,602, 5,50);//
+	    g2.fillRect(480,652,3,100);
+	    g2.fillRect(478,602, 3,50);//
+	    g2.fillRect(507,652, 6,100);
+	    g2.fillRect(510,602, 3,50);
+	    g2.setColor(Color.WHITE);
+	    g2.fillRect(462,652,10,100);
+	    g2.fillRect(462,602, 10,50);//
+	    g2.setColor(Color.BLACK);
+	    g2.fillRect(510,652, 3,100);
+	    g2.fillRect(513,602, 5,50);//
+	    g2.fillRect(520,652, 3,100);
+	    g2.fillRect(520,602, 3,50);//
+	    g2.fillRect(525,652,10,100);
+	    g2.fillRect(528,602, 10,50);//
+	    g2.fillRect(540,652,5,100);
+	    g2.fillRect(542,602, 7,50);//
+	    g2.setStroke(new BasicStroke(3));
+	    g2.drawRoundRect(442, 602, 111,50,10,10);  
+	    g2.drawRect(450, 652, 95, 100); 
+	    
+	    // Nube
+	    g2.setColor(Color.decode("#bddade"));
+	    g2.fillRoundRect(800, 587, 220, 55,50,50);
+	    g2.setColor(Color.white);
+	    g2.fillRoundRect(800, 587, 220, 45,50,50);
+	    
+	    // Montaña
+	    g2.setColor(Color.decode("#77b3d8"));
+	    g2.fillRect(950, 498,200, 258);
+	    g2.fillArc(950, 398, 200, 250, 0, 180);//
+	    
+	    
+	    //escuedra cubos
+	    int tamañocuad =50;
+	    
+	    for (int y = 700; y > 700 - (4 * tamañocuad); y -= (tamañocuad + 4)) {
+	    	g2.setColor(Color.decode("#9c9c9c")); // Gris medio
+	        g2.fillRoundRect(800, y, tamañocuad, tamañocuad, 25, 25);
+
+	        // Contorno negro
+	        g2.setColor(Color.BLACK);
+	        g2.setStroke(new BasicStroke(4));
+	        g2.drawRoundRect(800, y, tamañocuad, tamañocuad, 25, 25);
+	        // Brillos (puntitos blancos)
+	        g2.setColor(Color.WHITE);
+	        g2.fillOval(805, y + 5, 6, 6);
+	        g2.fillOval(815, y + 15, 5, 5);
+	        g2.fillOval(828, y + 8, 4, 4);
+	    }
+	    for (int x = 800 + tamañocuad + 4; x < 800 + (4 * tamañocuad); x += (tamañocuad + 4)) {
+	    	int y = 700 - (3 * (tamañocuad + 4));
+	        g2.setColor(Color.decode("#d9a223"));
+	        g2.fillRoundRect(x, y, tamañocuad, tamañocuad, 25, 25);
+	        g2.setColor(Color.BLACK);
+	        g2.setStroke(new BasicStroke(5));
+	        g2.drawRoundRect(x, y, tamañocuad, tamañocuad, 25, 25);
+	        g2.setColor(Color.decode("#eedf30"));
+	        g2.fillRoundRect(x+3,y+5 , 40, 40, 20, 20);
+	        g2.setColor(Color.BLACK);
+	        g2.setStroke(new BasicStroke(4));
+	        g2.drawLine(x + 18, y + 18, x + 18, y + 30);
+	        g2.drawLine(x + 30, y + 18, x + 30, y + 30);
+	    }
+	    
+	    // tubo chico
+	    g2.setColor(Color.decode("#8884d1") );
+	    g2.fillRect(865, 700, 95, 50);
+	    g2.fillRoundRect(857, 650, 111,50,10,10);
+	    // Brillo del tubo chico
+	    g2.setColor(Color.decode("#46438f"));
+	    g2.fillRect(867, 700, 3, 50);       
+	    g2.fillRect(864, 650, 5, 50);     
+	    g2.fillRect(893, 700, 3, 50);       
+	    g2.fillRect(891, 650, 3, 50); 
+	    g2.fillRect(920, 700, 6, 50);     
+	    g2.fillRect(923, 650, 3, 50); 
+	    g2.setColor(Color.WHITE);
+	    g2.fillRect(875, 700, 10, 50);      
+	    g2.fillRect(875, 650, 10, 50); 
+	    g2.setColor(Color.BLACK);
+	    g2.fillRect(923, 700, 3, 50);       
+	    g2.fillRect(926, 650, 5, 50); 
+	    g2.fillRect(933, 700, 3, 50);        
+	    g2.fillRect(933, 650, 3, 50);  
+	    g2.fillRect(938, 700, 10, 50);       
+	    g2.fillRect(941, 650, 10, 50); 
+	    g2.fillRect(953, 700, 5, 50);        
+	    g2.fillRect(955, 650, 7, 50);  
+	    g2.setStroke(new BasicStroke(3));
+	    g2.drawRoundRect(857, 650, 111, 50, 10, 10);
+	    g2.drawRect(865, 700, 95, 50);  
+	    
+	    // Pasto y tierra
+	    g2.setColor(Color.decode("#cd9e63")); 
+	    g2.fillRect(0, getHeight() - 120, getWidth(), 100);
+	    g2.setColor(Color.decode("#28bf21")); 
+	    g2.fillRect(0, getHeight() - 130, getWidth(), 30);
+	    for (int y = getHeight() - 120; y < getHeight(); y += pixel) {
+	        for (int x = 0; x < getWidth(); x += pixel) {
+	            if ((x + y) % 2 == 0) {
+	                g2.setColor(Color.decode("#cd9e63"));
+	            } else {
+	                g2.setColor(Color.decode("#e3b865"));
+	            }
+	            g2.fillRect(x, y, pixel, pixel);
+	        }
+	    }
+	    
+	    // Mario
+	    BufferedImage Mario;
+ 		try {
+ 			Mario = ImageIO.read(new File("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/Mario-removebg-preview.png"));
+ 			g2.drawImage(Mario, 325, 680,65,70,null,null);
+ 		}catch (IOException e ) {
+ 			e.printStackTrace();
+ 		}
+ 		
+ 		// Planta
+	    BufferedImage Planta;
+ 		try {
+ 			Planta = ImageIO.read(new File("C:/Users/smari/OneDrive/Escritorio/escuela/Programacion3/planta-removebg-preview.png"));
+ 			g2.drawImage(Planta, 458, 500,65,70,null,null);
+ 		}catch (IOException e ) {
+ 			e.printStackTrace();
+ 		}
+	    
+  }
+		/* // Fondo cielo
 	    g2.setColor(Color.decode("#b3eefe"));
 	    g2.fillRect(0, 0, getWidth(), getHeight());
 	    for (int y = 0; y < getHeight(); y += pixel) {
@@ -311,7 +542,7 @@ public class Ventana extends JFrame {
 	    g2.fillRect(880, 480, 10, 50);
 	    
 	    
-    }
+    }*/
     
     public JPanel Calculadora() {
 
@@ -734,9 +965,6 @@ public class Ventana extends JFrame {
 		
 		
 	}*/
-	
-
-
 
 
 	class FondoDegradado extends JPanel {
