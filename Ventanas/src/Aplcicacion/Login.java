@@ -76,7 +76,9 @@ public class Login extends JFrame {
         JMenuBar barra = new JMenuBar(); 
         // Crear menús
         JMenu menu = new JMenu("Archivo");  
-        JMenu menu2 = new JMenu("Ayuda");  
+        JMenu menu2 = new JMenu("Ayuda");
+        JMenu menu3 = new JMenu("Cuenta");
+        
 
          // Crear elementos de menú
          item1 = new JMenuItem("Guardar");  
@@ -94,16 +96,39 @@ public class Login extends JFrame {
          menu.add(item3);
          
          menu2.add(item5);  
-         menu2.add(item6);  
-         menu2.add(item7);
+         menu3.add(item6);  
+         menu3.add(item7);
          
          
 
          barra.add(menu);
          barra.add(menu2);
+         barra.add(menu3);
          this.setJMenuBar(barra);
          this.repaint();
          this.revalidate();
+         
+         item6.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("Registro");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
+
+         item7.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+            	
+	        		  manager("Login");
+	        		  System.out.println("FDJKGLDS");
+	     
+             }
+         });
+        
+          
 
 	}
 		
