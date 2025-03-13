@@ -75,31 +75,37 @@ public class Login extends JFrame {
         //Crear barra
         JMenuBar barra = new JMenuBar(); 
         // Crear menús
-        JMenu menu = new JMenu("Archivo");  
-        JMenu menu2 = new JMenu("Ayuda");
-        JMenu menu3 = new JMenu("Cuenta");
+        JMenu menu3 = new JMenu("Archivo");  
+        JMenu menu2 = new JMenu("Ususario");
+        JMenu menu = new JMenu("Cuenta");
         
 
          // Crear elementos de menú
-         item1 = new JMenuItem("Guardar");  
-         item2 = new JMenuItem("Nuevo");  
-         item3 = new JMenuItem("Eliminar");  
-         item4 = new JMenuItem("Compartir");
+         item1 = new JMenuItem("Alta");  
+         item2 = new JMenuItem("Baja");  
+         item3 = new JMenuItem("Consultar");  
+         item4 = new JMenuItem("¿Cómo crear un usuario?");
+         item8 = new JMenuItem("¿Cómo acceder al sistema?");  
+         item9 = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
          
-         item5 = new JMenuItem("Buscar");  
+         
+         item5 = new JMenuItem("Recuperar cuenta");  
          item6 = new JMenuItem("Registro");  
          item7 = new JMenuItem("Login");  
         
          // Añadir elementos al menú
-         menu.add(item1);  
-         menu.add(item2);  
-         menu.add(item3);
-         
-         menu2.add(item5);  
-         menu3.add(item6);  
-         menu3.add(item7);
+         menu3.add(item1);  
+         menu3.add(item2);  
+         menu3.add(item3);
          
          
+         menu.add(item6);  
+         menu.add(item7);
+         menu.add(item5);  
+         
+         menu2.add(item4);
+         menu2.add(item8);
+         menu2.add(item9);    
 
          barra.add(menu);
          barra.add(menu2);
@@ -107,6 +113,56 @@ public class Login extends JFrame {
          this.setJMenuBar(barra);
          this.repaint();
          this.revalidate();
+         
+         item1.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("Alta");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
+         
+         item2.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("Baja");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
+         
+         item3.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("Consultar");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
+         
+         item4.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("¿Cómo crear un usuario?");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
+         
+         item5.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("Recuperar cuenta");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
          
          item6.addActionListener(new ActionListener() {
              @Override
@@ -128,7 +184,25 @@ public class Login extends JFrame {
              }
          });
         
-          
+         item8.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+               
+	        		  manager("¿Cómo acceder al sistema?");
+	        		  System.out.println(",klhsdf");
+                
+             }
+         });
+
+         item9.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+            	
+	        		  manager("¿Qué pasa si olvidé mi contraseña?");
+	        		  System.out.println("FDJKGLDS");
+	     
+             }
+         });
 
 	}
 		
@@ -409,13 +483,203 @@ public class Login extends JFrame {
 		   return panel;
  	  }
  	  
+ 	 public JPanel Recuperarcuenta() {
+		   JPanel recuperar=new JPanel();
+			recuperar.setSize(500, 550);
+			recuperar.setLocation(362, 10);
+			//contentPane.add(registro);
+			recuperar.setBackground(new Color(255, 255, 153));
+			recuperar.setVisible(true);
+			recuperar.setLayout(null);
+		   	recuperar.setOpaque(true);
+		   	
+				
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("Recuperar cuenta");
+			lblTitulo.setSize(500,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setVisible(true);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			recuperar.add(lblTitulo);
+			return recuperar;
+ 	 }
+ 	 
+ 	 public JPanel Alta() {
+		   JPanel alta=new JPanel();
+		   alta.setSize(500, 550);
+		   alta.setLocation(362, 10);
+			//contentPane.add(registro);
+		   alta.setBackground(new Color(255, 255, 153));
+			alta.setVisible(true);
+			alta.setLayout(null);
+			alta.setOpaque(true);
+			
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("Dar de alta");
+			lblTitulo.setSize(100,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setVisible(true);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			alta.add(lblTitulo);
+			return alta;
+ 	 }
+ 	 
+ 	public JPanel Baja() {
+		   JPanel baja=new JPanel();
+		   baja.setSize(500, 550);
+		   baja.setLocation(362, 10);
+			//contentPane.add(registro);
+		   baja.setBackground(new Color(255, 255, 153));
+		   baja.setVisible(true);
+		   baja.setLayout(null);
+		   baja.setOpaque(true);
+				
+				
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("Dar De Baja");
+			lblTitulo.setSize(100,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setVisible(true);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			baja.add(lblTitulo);
+			return baja;
+	 }
+ 	
+ 	public JPanel Consulta() {
+		   JPanel consulta=new JPanel();
+		   consulta.setSize(500, 550);
+		   consulta.setLocation(362, 10);
+			//contentPane.add(registro);
+		   consulta.setBackground(new Color(255, 255, 153));
+		   consulta.setVisible(true);
+		   consulta.setLayout(null);
+		   consulta.setOpaque(true);
+				
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("CONSULTA");
+			lblTitulo.setSize(100,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setVisible(true);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			consulta.add(lblTitulo);
+			return consulta;
+	 }
+ 	 
+ 	public JPanel tutoCrearUsuario() {
+		   JPanel tutoCrear=new JPanel();
+		   tutoCrear.setSize(500, 550);
+		   tutoCrear.setLocation(362, 10);
+			//contentPane.add(registro);
+		   tutoCrear.setBackground(new Color(255, 255, 153));
+		   tutoCrear.setVisible(true);
+		   tutoCrear.setLayout(null);
+		   tutoCrear.setOpaque(true);
+				
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("Tutorial crear Usuario");
+			lblTitulo.setSize(500,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setVisible(true);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			tutoCrear.add(lblTitulo);
+			return tutoCrear;
+	 }
+ 	
+ 	public JPanel tutoAcceder() {
+		   JPanel tutoAcceder=new JPanel();
+		   tutoAcceder.setSize(500, 550);
+		   tutoAcceder.setLocation(362, 10);
+			//contentPane.add(registro);
+		   tutoAcceder.setBackground(new Color(255, 255, 153));
+		   tutoAcceder.setVisible(true);
+		   	tutoAcceder.setLayout(null);
+		   	tutoAcceder.setOpaque(true);
+				
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("Tutorial Acceder");
+			lblTitulo.setSize(500,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			tutoAcceder.add(lblTitulo);
+			return tutoAcceder;
+	 }
+ 	
+ 	public JPanel tutoCambioContraseña() {
+		   JPanel tutoCambio=new JPanel();
+		   tutoCambio.setSize(500, 550);
+		   tutoCambio.setLocation(362, 10);
+			//contentPane.add(registro);
+		   tutoCambio.setBackground(new Color(255, 255, 153));
+		   tutoCambio.setVisible(true);
+		   tutoCambio.setLayout(null);
+		   tutoCambio.setOpaque(true);
+				
+			Font fuente1 = new Font("Arial", Font.BOLD + Font.ITALIC, 15);
+			JLabel lblTitulo= new JLabel("Cambiio Contraseña");
+			lblTitulo.setSize(500,15);
+			lblTitulo.setBackground(Color.DARK_GRAY);
+			lblTitulo.setFont(fuente1);
+			lblTitulo.setVisible(true);
+			lblTitulo.setOpaque(false);
+			lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);;
+			int centerLabelX1 = (500 - lblTitulo.getWidth()) / 2;
+			//int centerLabelY = (550 - lblTitulo.getWidth()) / 2;
+			lblTitulo.setLocation(centerLabelX1, 10); // Y fija, X centrada
+			tutoCambio.add(lblTitulo);
+			return tutoCambio;
+	 }
+ 	
  	  public void manager(String target) {
  		  this.getContentPane().removeAll();
  		  if(target.equals("Registro")) {
  			  getContentPane().add(this.Registro());
  	  }else if(target.equals("Login")) {
 			  getContentPane().add(this.Loginpanel());
- 	  }
+ 	  }else if(target.equals("Recuperar cuenta")) {
+		  getContentPane().add(this.Recuperarcuenta());
+	  }else if(target.equals("Alta")) {
+		  getContentPane().add(this.Alta());
+	  }else if(target.equals("Baja")) {
+		  getContentPane().add(this.Baja());
+	  }else if(target.equals("Consultar")) {
+		  getContentPane().add(this.Consulta());
+	  }else if(target.equals("¿Cómo crear un usuario?")) {
+		  getContentPane().add(this.tutoCrearUsuario());
+	  }else if(target.equals("¿Cómo acceder al sistema?")) {
+		  getContentPane().add(this.tutoAcceder());
+	  }else if(target.equals("¿Qué pasa si olvidé mi contraseña?")) {
+		  getContentPane().add(this.tutoCambioContraseña());
+	  }
  		  
  		  this.revalidate();
  		  this.repaint();
