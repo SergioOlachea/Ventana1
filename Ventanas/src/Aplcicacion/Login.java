@@ -67,7 +67,8 @@ public class Login extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
-		this.getContentPane().add(this.Loginpanel());
+		this.getContentPane().add(this.Botones());
+		//this.getContentPane().add(this.Loginpanel());
 		//getContentPane().add(this.Registro());
 		//getContentPane().add(this.Recuperarcuenta());
 		//getContentPane().add(this.Alta());
@@ -216,9 +217,57 @@ public class Login extends JFrame {
          });
 
 	}
+	
+
+	
+	public JPanel Botones() {
+		JPanel botones = new JPanel();
+		botones.setBackground(new Color(123, 104, 238));
+		botones.setBorder(new LineBorder(new Color(255, 165, 0), 3));
+		botones.setSize(883, 621);
+		botones.setLocation(10, 10);
+		botones.setLayout(null);
+		
+		Random rand = new Random();
+		JButton btnNewButton_4 = new JButton("haz click");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			int r=0,g=0,b=0;
+			int x=0, y=0;
+			int alto=0,largo=0;
+			
+			//coordenadas
+			x = rand.nextInt(862); 
+			y = rand.nextInt(521);
+			
+			//tamaño
+			alto =  rand.nextInt(342); 
+			largo = rand.nextInt(682);
+			
+			//Color
+			r= rand.nextInt(250);
+			g= rand.nextInt(250);
+			b= rand.nextInt(250);
+			
+			 JButton hola = new JButton("Copia");
+			 hola.setLocation(x,y);
+			 hola.setSize(alto, largo);
+			 hola.setBackground(new Color(r,g,b));
+			 botones.add(hola);
+			 
+			 botones.repaint();
+			}
+		});
+		btnNewButton_4.setBounds(301, 239, 163, 79);
+		botones.add(btnNewButton_4);
+		
+		return botones;
+		
+	}
 		
  	   
- 	   public JPanel Registro() {
+ 	  public JPanel Registro() {
  		   JPanel registro=new JPanel();
  		   registro.setBorder(new LineBorder(new Color(255, 165, 0), 3));
 			registro.setSize(500, 550);
