@@ -256,6 +256,11 @@ public class Login extends JFrame {
 			 hola.setBackground(new Color(r,g,b));
 			 botones.add(hola);
 			 
+			 hola.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Recuperacion.showMessageDialog(null, "Codigo de color"+ hola.getBackground(), "HOLAAAAAA", JOptionPane.INFORMATION_MESSAGE,null);
+					}
+				});
 			 botones.repaint();
 			}
 		});
