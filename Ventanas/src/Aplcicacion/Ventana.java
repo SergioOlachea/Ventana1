@@ -40,7 +40,7 @@ public class Ventana extends JFrame {
        
         this.setVisible(true);
 		//this.add(this.ventanaRegistro());
-		this.add(Calculadora());
+		//this.add(Calculadora());
 		//this.add(this.Tabla());
         
 		
@@ -89,8 +89,8 @@ public class Ventana extends JFrame {
         layeredPane.add(fondo, JLayeredPane.DEFAULT_LAYER);
         //layeredPane.add(Calculadora(), JLayeredPane.PALETTE_LAYER);
         //layeredPane.add(CalculadoraInteres(), JLayeredPane.PALETTE_LAYER);
-        layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
-        layeredPane.add(ventanaRegistro(), JLayeredPane.PALETTE_LAYER);
+        //layeredPane.add(login(), JLayeredPane.PALETTE_LAYER);
+        //layeredPane.add(ventanaRegistro(), JLayeredPane.PALETTE_LAYER);
         
 
         // Agregamos el layeredPane al JFrame
@@ -106,7 +106,7 @@ public class Ventana extends JFrame {
         
     }
     
- /* public void paint (Graphics g) {
+ public void paint (Graphics g) {
     	
 		super.paint(g);
 		
@@ -350,7 +350,7 @@ public class Ventana extends JFrame {
 	    
   }
 		 // Fondo cielo
-	    g2.setColor(Color.decode("#b3eefe"));
+	  /*  g2.setColor(Color.decode("#b3eefe"));
 	    g2.fillRect(0, 0, getWidth(), getHeight());
 	    for (int y = 0; y < getHeight(); y += pixel) {
 	        for (int x = 0; x < getWidth(); x += pixel) {

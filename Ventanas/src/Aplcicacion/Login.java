@@ -259,10 +259,15 @@ public class Login extends JFrame {
 			 hola.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Recuperacion.showMessageDialog(null, "Codigo de color"+ hola.getBackground(), "HOLAAAAAA", JOptionPane.INFORMATION_MESSAGE,null);
-					}
-				});
-			 botones.repaint();
-			}
+						int confirmacion = JOptionPane.showConfirmDialog(null,"¿Deseas eliminar este botón?","Confirmación",JOptionPane.YES_NO_OPTION);
+
+					        if (confirmacion == JOptionPane.YES_OPTION) {
+					            botones.remove(hola);
+					            botones.repaint();
+					        }
+					    }
+					});
+			 }
 		});
 		btnNewButton_4.setBounds(301, 239, 163, 79);
 		botones.add(btnNewButton_4);
