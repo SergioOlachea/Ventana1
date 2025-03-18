@@ -69,24 +69,28 @@ public class Examen extends JFrame {
 		panel.add(lblNewLabel_1_1);
 		
 		textField = new JTextField();
+		textField.setEditable(false);
 		textField.setText("3625");
 		textField.setBounds(93, 24, 96, 19);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		txtAvenidaUniversidad = new JTextField();
+		txtAvenidaUniversidad.setEditable(false);
 		txtAvenidaUniversidad.setText("avenida Universidad #2463");
 		txtAvenidaUniversidad.setColumns(10);
 		txtAvenidaUniversidad.setBounds(93, 46, 96, 19);
 		panel.add(txtAvenidaUniversidad);
 		
 		txtIndianaMoes = new JTextField();
+		txtIndianaMoes.setEditable(false);
 		txtIndianaMoes.setText("Indiana moes");
 		txtIndianaMoes.setColumns(10);
 		txtIndianaMoes.setBounds(310, 24, 96, 19);
 		panel.add(txtIndianaMoes);
 		
 		textField_3 = new JTextField();
+		textField_3.setEditable(false);
 		textField_3.setText("667524938");
 		textField_3.setColumns(10);
 		textField_3.setBounds(310, 46, 96, 19);
