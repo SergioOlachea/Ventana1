@@ -49,6 +49,16 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_3;
 	private JButton btnNewButton_3;
 	Border borde = new LineBorder(Color.DARK_GRAY, 2, true);
+	private JButton btnNewButton_5;
+	JButton btnNewButton_7;
+	JButton btnNewButton_8;
+	JButton btnNewButton_11;
+	JButton btnNewButton_13;
+	JButton btnNewButton_12;
+	JButton btnNewButton_10;
+	JButton btnNewButton_9;
+	boolean turno=true;
+	private JButton btnNewButton_6;
 
 	/**
 	 * Launch the application.
@@ -63,11 +73,12 @@ public class Login extends JFrame {
 	public Login() {
 		
     	this.setTitle(getTitle());
-		this.setSize(917,700);
+		this.setSize(654,700);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
-		this.getContentPane().add(this.Botones());
+		this.getContentPane().add(this.Gato());
+		//this.getContentPane().add(this.Botones());
 		//this.getContentPane().add(this.Loginpanel());
 		//getContentPane().add(this.Registro());
 		//getContentPane().add(this.Recuperarcuenta());
@@ -276,7 +287,198 @@ public class Login extends JFrame {
 		
 	}
 		
- 	   
+	   public JPanel Gato() {
+		   JPanel gato = new JPanel();
+		   gato.setSize(487, 469);
+		   gato.setLocation(91, 10);
+		   gato.setLayout(new GridLayout(3, 3, 3, 3));
+		   
+		   
+		
+	
+	
+	
+		   btnNewButton_8 = new JButton();
+		   btnNewButton_8.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_8.getText().isEmpty()) {
+		   		btnNewButton_8.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   					   		btnNewButton_8.setEnabled(false);
+		   					   	turno = !turno;
+	
+		   	}
+	   });
+		   gato.add(btnNewButton_8);
+		   
+		   
+		   btnNewButton_11 = new JButton();
+		   btnNewButton_11.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_11.getText().isEmpty()) {
+		   		btnNewButton_11.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		
+		   		btnNewButton_11.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_11);
+		   
+		   btnNewButton_6 = new JButton();
+		   btnNewButton_6.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_6.getText().isEmpty()) {
+		   		btnNewButton_6.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   					   		btnNewButton_6.setEnabled(false);
+		   					   	turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_6);
+		   
+		   btnNewButton_13 = new JButton();
+		   btnNewButton_13.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_13.getText().isEmpty()) {
+		   		btnNewButton_13.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		
+		   		btnNewButton_13.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_13);
+		   
+		   btnNewButton_12 = new JButton();
+		   btnNewButton_12.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_12.getText().isEmpty()) {
+		   		btnNewButton_12.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		
+		   		btnNewButton_12.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_12);
+		   
+		   btnNewButton_10 = new JButton();
+		   btnNewButton_10.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+		   		
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_10.getText().isEmpty()) {
+		   		btnNewButton_10.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		
+		   		btnNewButton_10.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_10);
+		   
+		   btnNewButton_9 = new JButton();
+		   btnNewButton_9.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_9.getText().isEmpty()) {
+		   		btnNewButton_9.setText(jugador);
+		   	}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		btnNewButton_9.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_9);
+		   
+		   btnNewButton_5 = new JButton();
+		   btnNewButton_5.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+		   		
+				String jugador = turno ? "X" : "O";	
+		   		if (btnNewButton_5.getText().isEmpty()) {
+		   			btnNewButton_5.setText(jugador);
+		   		}
+		   		if (Ganador()) {
+		   			Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		btnNewButton_5.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_5);
+		   
+		   btnNewButton_7 = new JButton();
+		   btnNewButton_7.addActionListener(new ActionListener() {
+		   	public void actionPerformed(ActionEvent e) {
+		   	
+			String jugador = turno ? "X" : "O";
+			if(btnNewButton_7.getText().isEmpty()){
+				btnNewButton_7.setText(jugador);
+				}
+		   			
+		   	if (Ganador()) {
+		   		Bienvenida.showMessageDialog(null, "El jugador ganador es "+ jugador, "GANADOR", JOptionPane.INFORMATION_MESSAGE,null);
+		   		}
+		   		
+		   		btnNewButton_7.setEnabled(false);
+		   		turno = !turno;
+		   	}
+	   });
+		   gato.add(btnNewButton_7);
+		   
+		   return gato;
+
+}
+   
+   public boolean Ganador() {
+	   boolean ganador =false;
+	   if (btnNewButton_8.getText().equals("X") && btnNewButton_11.getText().equals("X")&&btnNewButton_6.getText().equals("X")
+	   		||btnNewButton_6.getText().equals("X") && btnNewButton_12.getText().equals("X")&&btnNewButton_9.getText().equals("X")
+			||btnNewButton_13.getText().equals("X") && btnNewButton_12.getText().equals("X")&&btnNewButton_10.getText().equals("X")
+			||btnNewButton_9.getText().equals("X") && btnNewButton_5.getText().equals("X")&&btnNewButton_7.getText().equals("X")
+			||btnNewButton_8.getText().equals("X") && btnNewButton_12.getText().equals("X")&&btnNewButton_7.getText().equals("X")) {
+	   		ganador = true;
+	   } else if (btnNewButton_8.getText().equals("O") && btnNewButton_11.getText().equals("O")&&btnNewButton_6.getText().equals("O")
+	   		||btnNewButton_6.getText().equals("O") && btnNewButton_12.getText().equals("O")&&btnNewButton_9.getText().equals("O")
+			||btnNewButton_13.getText().equals("O") && btnNewButton_12.getText().equals("O")&&btnNewButton_10.getText().equals("O")
+			||btnNewButton_9.getText().equals("O") && btnNewButton_5.getText().equals("O")&&btnNewButton_7.getText().equals("O")
+			||btnNewButton_8.getText().equals("O") && btnNewButton_12.getText().equals("O")&&btnNewButton_7.getText().equals("O")) {
+	   	
+	   		ganador = true;
+	   }
+	return ganador;
+	   
+	   
+	   
+   }
+	
  	  public JPanel Registro() {
  		   JPanel registro=new JPanel();
  		   registro.setBorder(new LineBorder(new Color(255, 165, 0), 3));
