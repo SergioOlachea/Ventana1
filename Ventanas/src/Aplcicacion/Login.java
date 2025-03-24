@@ -48,23 +48,29 @@ public class Login extends JFrame {
 	JMenuItem item1, item2, item3, item4, item5, item6, item7, item8, item9;
 	private JTextField textField;
 	private JLabel lblNewLabel_3;
-	private JButton btnNewButton_3;
-	Border borde = new LineBorder(Color.DARK_GRAY, 2, true);
-	private JButton btnNewButton_5;
+	
+	Border borde = new LineBorder(Color.DARK_GRAY,2, true);
+	JButton btnNewButton_1;
+	JButton btnNewButton_2;
+	JButton btnNewButton_3;
+	JButton btnNewButton_4;
+	JButton btnNewButton_5;
+	JButton btnNewButton_6;
 	JButton btnNewButton_7;
 	JButton btnNewButton_8;
-	JButton btnNewButton_11;
-	JButton btnNewButton_13;
-	JButton btnNewButton_12;
-	JButton btnNewButton_10;
 	JButton btnNewButton_9;
+	JButton btnNewButton_10;
+	JButton btnNewButton_11;
+	JButton btnNewButton_12;
+	JButton btnNewButton_13;
+	JButton btnNewButton_14;
+	JButton btnNewButton_15;
+	JButton btnNewButton_16;
 	boolean turno=true;
-	private JButton btnNewButton_6;
 	private JTextField textField_1;
 	 int x=0,O=0;
 	 private JTextField textField_3;
-	 ImageIcon x1 = new ImageIcon("C:/Users/smari/git/PracticaVentana/Ventanas/src/Aplcicacion/Default%20Title%20(1).png");
-	 ImageIcon O1 = new ImageIcon("C:/Users/smari/git/PracticaVentana/Ventanas/src/Aplcicacion/tom%20(1).png");
+	 
 
 	/**
 	 * Launch the application.
@@ -79,30 +85,34 @@ public class Login extends JFrame {
 	public Login() {
 		
     	this.setTitle(getTitle());
-		this.setSize(654,700);
+		this.setSize(654,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(null);
-		this.getContentPane().add(this.Gato());
+		getContentPane().setLayout(new BorderLayout(5, 0));
+		this.getContentPane().add(this.JuegoBotones(), BorderLayout.CENTER);
+		this.getContentPane().add(this.Marcador(), BorderLayout.NORTH);
 		
-		JButton btnNewButton_14 = new JButton("Reiniciar");
-		btnNewButton_14.setBounds(91, 457, 400, 30);
-		getContentPane().add(btnNewButton_14);
-		btnNewButton_14.setVisible(true);
-		btnNewButton_14.setOpaque(true);
-		btnNewButton_14.addActionListener(new ActionListener() {
+		JButton Reiniciar = new JButton("Reiniciar");
+		Reiniciar.setBackground(new Color(123, 104, 238));
+		getContentPane().add(Reiniciar, BorderLayout.SOUTH);
+		Reiniciar.setVisible(true);
+		Reiniciar.setOpaque(true);
+		Reiniciar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-				JButton[] botones = {btnNewButton_8, btnNewButton_11, btnNewButton_6,btnNewButton_13, btnNewButton_12, btnNewButton_10, btnNewButton_9, btnNewButton_5, btnNewButton_7 };
+				
+				/*JButton[] botones = {btnNewButton_1, btnNewButton_2, btnNewButton_3,btnNewButton_4, btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8, btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12,btnNewButton_13, btnNewButton_14, btnNewButton_15 };
 			            
 					for (JButton boton : botones) {
 			            boton.setText("");
 			            boton.setIcon(null);
 			            boton.setEnabled(true);
 					}
-			        turno = true;
+			        turno = true;*/
+					JuegoBotones();
 				}
 			});
+		
 		//this.getContentPane().add(this.Botones());
 		//this.getContentPane().add(this.Loginpanel());
 		//getContentPane().add(this.Registro());
@@ -255,7 +265,81 @@ public class Login extends JFrame {
 	}
 	
 
-	
+	public JPanel Marcador () {
+		JPanel marcador = new JPanel();
+		marcador.setBackground(new Color(0, 255, 255));
+	    JLabel etiqueta = new JLabel("Contador clicks:");
+	    JTextField campoContador = new JTextField(5);
+	    campoContador.setEditable(false); // Solo visual
+	    marcador.add(etiqueta);
+	    marcador.add(campoContador);
+	    
+	    return marcador;
+	}
+	public JPanel JuegoBotones() {
+	    
+		JPanel juego = new JPanel();
+		juego.setBackground(new Color(30, 144, 255));
+		juego.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		juego.setLayout(new GridLayout(4, 4, 8, 8));
+		
+		
+		 btnNewButton_1 = new JButton();
+		    btnNewButton_2 = new JButton();
+		    btnNewButton_3 = new JButton();
+		    btnNewButton_4 = new JButton();
+		    btnNewButton_5 = new JButton();
+		    btnNewButton_6 = new JButton();
+		    btnNewButton_7 = new JButton();
+		    btnNewButton_8 = new JButton();
+		    btnNewButton_9 = new JButton();
+		    btnNewButton_10 = new JButton();
+		    btnNewButton_11 = new JButton();
+		    btnNewButton_12 = new JButton();
+		    btnNewButton_13 = new JButton();
+		    btnNewButton_14 = new JButton();
+		    btnNewButton_15 = new JButton();
+		    btnNewButton_16 = new JButton();
+
+		    // Arreglo para recorrerlos fácilmente
+		    JButton[] botones = {
+		        btnNewButton_1, btnNewButton_2, btnNewButton_3, btnNewButton_4,
+		        btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8,
+		        btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12,
+		        btnNewButton_13, btnNewButton_14, btnNewButton_15, btnNewButton_16
+		    };
+
+		    // Agregar al panel uno por uno
+		    for (JButton boton : botones) {
+		    	boton.setBorder(borde);
+		    	boton.setBackground(new Color(173,216,230));
+		        juego.add(boton);
+		    }
+
+		    // Arreglo de strings con los valores
+		    String[] valores = {
+		        "1", "2", "3", "4",
+		        "5", "6", "7", "8",
+		        "9", "10", "11", "12",
+		        "13", "14", "15", ""
+		    };
+
+		    // Mezclar los valores aleatoriamente
+		    Random rand = new Random();
+		    for (int i = 0; i < valores.length; i++) {
+		        int j = rand.nextInt(valores.length);
+		        String temp = valores[i];
+		        valores[i] = valores[j];
+		        valores[j] = temp;
+		    }
+
+		    // Asignar los textos aleatorios
+		    for (int i = 0; i < botones.length; i++) {
+		        botones[i].setText(valores[i]);
+		    }
+	    return juego;
+	}
+
 	public JPanel Botones() {
 		JPanel botones = new JPanel();
 		botones.setBackground(new Color(123, 104, 238));
@@ -312,7 +396,7 @@ public class Login extends JFrame {
 		
 	}
 		
-	   public JPanel Gato() {
+	public JPanel Gato() {
 		   
 		  
 		   JPanel contenedor = new JPanel();
@@ -560,7 +644,7 @@ public class Login extends JFrame {
 
 }
    
-   public boolean Ganador() {
+    public boolean Ganador() {
 	   boolean ganador = false;
 	    
 	    // Gano X
@@ -608,7 +692,7 @@ public class Login extends JFrame {
 	
    }
 	
- 	  public JPanel Registro() {
+ 	public JPanel Registro() {
  		   JPanel registro=new JPanel();
  		   registro.setBorder(new LineBorder(new Color(255, 165, 0), 3));
 			registro.setSize(500, 550);
@@ -780,7 +864,7 @@ public class Login extends JFrame {
          
  	   }
  	   
- 	  public JPanel Loginpanel() {
+ 	public JPanel Loginpanel() {
  			JPanel panel = new JPanel();
  			panel.setBounds(81, 10, 508, 413);
  			panel.setToolTipText("");
@@ -916,7 +1000,7 @@ public class Login extends JFrame {
 		   return panel;
  	  }
  	  
- 	 public JPanel Recuperarcuenta() {
+ 	public JPanel Recuperarcuenta() {
 		   JPanel recuperar=new JPanel();
 		   recuperar.setBorder(new LineBorder(new Color(50, 205, 50), 3));
 			recuperar.setSize(338, 254);
@@ -1016,7 +1100,7 @@ public class Login extends JFrame {
 			return recuperar;
  	 }
  	 
- 	 public JPanel Alta() {
+ 	public JPanel Alta() {
  		JPanel alta = new JPanel();
  	    alta.setSize(325, 384);
  	    alta.setLocation(172, 10);
