@@ -7,6 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
@@ -49,7 +53,7 @@ public class Login extends JFrame {
 	private JTextField textField;
 	private JLabel lblNewLabel_3;
 	
-	Border borde = new LineBorder(Color.DARK_GRAY,2, true);
+	Border borde = new LineBorder(new Color(128,0,128),2, true);
 	JButton btnNewButton_1;
 	JButton btnNewButton_2;
 	JButton btnNewButton_3;
@@ -70,9 +74,9 @@ public class Login extends JFrame {
 	private JTextField textField_1;
 	 int x=0,O=0;
 	 private JTextField textField_3;
-	 
-
-	/**
+	 private JTextField textField_2;
+	 int contador=0;
+		/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -85,33 +89,12 @@ public class Login extends JFrame {
 	public Login() {
 		
     	this.setTitle(getTitle());
-		this.setSize(654,500);
+		this.setSize(810,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		getContentPane().setLayout(new BorderLayout(5, 0));
-		this.getContentPane().add(this.JuegoBotones(), BorderLayout.CENTER);
-		this.getContentPane().add(this.Marcador(), BorderLayout.NORTH);
-		
-		JButton Reiniciar = new JButton("Reiniciar");
-		Reiniciar.setBackground(new Color(123, 104, 238));
-		getContentPane().add(Reiniciar, BorderLayout.SOUTH);
-		Reiniciar.setVisible(true);
-		Reiniciar.setOpaque(true);
-		Reiniciar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-				
-				/*JButton[] botones = {btnNewButton_1, btnNewButton_2, btnNewButton_3,btnNewButton_4, btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8, btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12,btnNewButton_13, btnNewButton_14, btnNewButton_15 };
-			            
-					for (JButton boton : botones) {
-			            boton.setText("");
-			            boton.setIcon(null);
-			            boton.setEnabled(true);
-					}
-			        turno = true;*/
-					JuegoBotones();
-				}
-			});
+		getContentPane().setLayout(null);
+		this.getContentPane().add(this.JuegoBotones());
+		this.getContentPane().add(this.Marcador());
 		
 		//this.getContentPane().add(this.Botones());
 		//this.getContentPane().add(this.Loginpanel());
@@ -267,24 +250,75 @@ public class Login extends JFrame {
 
 	public JPanel Marcador () {
 		JPanel marcador = new JPanel();
-		marcador.setBackground(new Color(0, 255, 255));
+		marcador.setBorder(new LineBorder(new Color(139, 0, 139), 2));
+		marcador.setBounds(623, 0, 173, 420);
+		marcador.setBackground(new Color(148, 0, 211));
 	    JLabel etiqueta = new JLabel("Contador clicks:");
-	    JTextField campoContador = new JTextField(5);
+	    etiqueta.setFont(new Font("Wide Latin", Font.BOLD | Font.ITALIC, 10));
+	    etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
+	    etiqueta.setBounds(10, 174, 153, 19);
+	    JTextField campoContador = new JTextField(contador);
+	    campoContador.setOpaque(false);
+	    campoContador.setBounds(10, 203, 153, 19);
 	    campoContador.setEditable(false); // Solo visual
+	    marcador.setLayout(null);
 	    marcador.add(etiqueta);
 	    marcador.add(campoContador);
+	    
+	    JButton Reiniciar = new JButton("Reiniciar");
+	    Reiniciar.setBounds(10, 335, 153, 21);
+	    marcador.add(Reiniciar);
+	    Reiniciar.setBackground(new Color(123, 104, 238));
+	    Reiniciar.setVisible(true);
+	    Reiniciar.setOpaque(true);
+	    
+	    JLabel etiqueta_1 = new JLabel("Tiempo:");
+	    etiqueta_1.setFont(new Font("Wide Latin", Font.BOLD | Font.ITALIC, 12));
+	    etiqueta_1.setHorizontalAlignment(SwingConstants.CENTER);
+	    etiqueta_1.setBounds(10, 93, 153, 19);
+	    marcador.add(etiqueta_1);
+	    
+	    textField_2 = new JTextField(5);
+	    textField_2.setEditable(false);
+	    textField_2.setOpaque(false);
+	    textField_2.setBounds(10, 122, 153, 19);
+	    marcador.add(textField_2);
+	    
+	    JButton btnNewButton_17 = new JButton("New button");
+	    btnNewButton_17.setBounds(10, 275, 153, 21);
+	    marcador.add(btnNewButton_17);
+	    
+	    JButton btnNewButton_18 = new JButton("New button");
+	    btnNewButton_18.setBounds(10, 306, 153, 19);
+	    marcador.add(btnNewButton_18);
+	    Reiniciar.addActionListener(new ActionListener() {
+	    		public void actionPerformed(ActionEvent e) {
+	    			
+	    		
+	    		/*JButton[] botones = {btnNewButton_1, btnNewButton_2, btnNewButton_3,btnNewButton_4, btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8, btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12,btnNewButton_13, btnNewButton_14, btnNewButton_15 };
+	    	            
+	    			for (JButton boton : botones) {
+	    	            boton.setText("");
+	    	            boton.setIcon(null);
+	    	            boton.setEnabled(true);
+	    			}
+	    	        turno = true;*/
+	    			JuegoBotones();
+	    		}
+	    	});
 	    
 	    return marcador;
 	}
 	public JPanel JuegoBotones() {
 	    
 		JPanel juego = new JPanel();
-		juego.setBackground(new Color(30, 144, 255));
-		juego.setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		juego.setBounds(0, 0, 622, 420);
+		juego.setBackground(new Color(153, 50, 204));
+		juego.setBorder(new LineBorder(new Color(139, 0, 139), 2));
 		juego.setLayout(new GridLayout(4, 4, 8, 8));
 		
 		
-		 btnNewButton_1 = new JButton();
+		    btnNewButton_1 = new JButton();
 		    btnNewButton_2 = new JButton();
 		    btnNewButton_3 = new JButton();
 		    btnNewButton_4 = new JButton();
@@ -301,42 +335,71 @@ public class Login extends JFrame {
 		    btnNewButton_15 = new JButton();
 		    btnNewButton_16 = new JButton();
 
-		    // Arreglo para recorrerlos fácilmente
-		    JButton[] botones = {
-		        btnNewButton_1, btnNewButton_2, btnNewButton_3, btnNewButton_4,
-		        btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8,
-		        btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12,
-		        btnNewButton_13, btnNewButton_14, btnNewButton_15, btnNewButton_16
+		    // Arreglo de botones
+		    JButton[] []botones = {
+		        {btnNewButton_1, btnNewButton_2, btnNewButton_3, btnNewButton_4},
+		        {btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8},
+		        {btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12},
+		        {btnNewButton_13, btnNewButton_14, btnNewButton_15, btnNewButton_16}
 		    };
-
-		    // Agregar al panel uno por uno
-		    for (JButton boton : botones) {
-		    	boton.setBorder(borde);
-		    	boton.setBackground(new Color(173,216,230));
-		        juego.add(boton);
-		    }
-
-		    // Arreglo de strings con los valores
-		    String[] valores = {
-		        "1", "2", "3", "4",
-		        "5", "6", "7", "8",
-		        "9", "10", "11", "12",
-		        "13", "14", "15", ""
-		    };
-
-		    // Mezclar los valores aleatoriamente
-		    Random rand = new Random();
-		    for (int i = 0; i < valores.length; i++) {
-		        int j = rand.nextInt(valores.length);
-		        String temp = valores[i];
-		        valores[i] = valores[j];
-		        valores[j] = temp;
-		    }
-
-		    // Asignar los textos aleatorios
+		    int[][] matrizAuxiliar = new int[4][4];
+		    
+		    // Agrega de forma automatica toda la matriz de botones
 		    for (int i = 0; i < botones.length; i++) {
-		        botones[i].setText(valores[i]);
+		    	for (int j=0;j<botones.length;j++) {
+		    		botones[i][j].setBackground(new Color(106,90,205));
+		    		botones[i][j].setBorder(borde);
+		    		juego.add(botones[i][j]);
+		    	}
 		    }
+		    List<String> valores = new ArrayList<>();
+
+			 // Agregar los números del 1 al 15 como Strings
+			 for (int i = 1; i <= 15; i++) {
+			     valores.add(String.valueOf(i));
+			 }
+	
+			
+			 valores.add("");
+			 Collections.shuffle(valores);
+			 
+			 // Agrega los valores a la matriz
+			 int recorrido = 0; 
+			 for (int i = 0; i < botones.length; i++) {
+			     for (int j = 0; j < botones[i].length; j++) { 
+			         botones[i][j].setText(valores.get(recorrido)); 
+			         recorrido++;
+			     }
+			 }
+			 
+			 // Ciclo para agregar las acciones a todos los botones
+			 for (int i = 0; i < botones.length; i++) {
+			     for (int j = 0; j < botones[i].length; j++) { 
+					 final int c1 = i, c2 = j;
+				        botones[i][j].addActionListener(new ActionListener() {
+				            public void actionPerformed(ActionEvent e) {
+				            	
+				                // Verificar si alguno de los botones colindantes es el espacio vacío
+				            	 if (c1 > 0 && botones[c1-1][c2].getText().equals("")) { 
+				                     botones[c1-1][c2].setText(botones[c1][c2].getText());
+				                     botones[c1][c2].setText("");
+				                 } 
+				                 else if (c1 < 3 && botones[c1+1][c2].getText().equals("")) {
+				                     botones[c1+1][c2].setText(botones[c1][c2].getText());
+				                     botones[c1][c2].setText("");
+				                 }
+				                 else if (c2 > 0 && botones[c1][c2-1].getText().equals("")) {
+				                     botones[c1][c2-1].setText(botones[c1][c2].getText());
+				                     botones[c1][c2].setText("");
+				                 }
+				                 else if (c2 < 3 && botones[c1][c2+1].getText().equals("")) {
+				                     botones[c1][c2+1].setText(botones[c1][c2].getText());
+				                     botones[c1][c2].setText("");
+				                 }
+			                 }
+				        });
+			     }
+		     }
 	    return juego;
 	}
 
