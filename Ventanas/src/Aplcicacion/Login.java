@@ -12,7 +12,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -72,6 +74,9 @@ public class Login extends JFrame {
 	JButton btnNewButton_16;
 	boolean turno=true;
 	private JTextField textField_1;
+	JTextField campoContador;
+	Timer timer;
+	int hor=0,min=0,seg=0;
 	 int x=0,O=0;
 	 private JTextField textField_3;
 	 private JTextField textField_2;
@@ -111,6 +116,7 @@ public class Login extends JFrame {
 		//this.add(this.ventanaRegistro());
 		//this.add(Calculadora());
 		//this.add(this.Tabla());
+        
         
 		
         //Crear barra
@@ -244,23 +250,52 @@ public class Login extends JFrame {
 	     
              }
          });
+         
+         timer = new Timer(1000, new ActionListener(){
+             @Override
+             public void actionPerformed(ActionEvent e) {
+            	 seg++;
+                 if (seg == 60) {
+                     seg = 0;
+                     min++;
+                     if (min == 60) {
+                         min = 0;
+                         hor++;
+                     }
+                 }
+                 actualizarCronometro();
+             }
+         });
 
 	}
 	
+	// Actualizacion del conometro
+	private void actualizarCronometro() {
+        String tiempo = String.format("%02d:%02d:%02d", hor, min, seg);
+        textField_2.setText(tiempo);
+    }
+
 
 	public JPanel Marcador () {
+		// Panel contenedor de marcador
 		JPanel marcador = new JPanel();
 		marcador.setBorder(new LineBorder(new Color(139, 0, 139), 2));
 		marcador.setBounds(623, 0, 173, 420);
 		marcador.setBackground(new Color(148, 0, 211));
+		
 	    JLabel etiqueta = new JLabel("Contador clicks:");
 	    etiqueta.setFont(new Font("Wide Latin", Font.BOLD | Font.ITALIC, 10));
 	    etiqueta.setHorizontalAlignment(SwingConstants.CENTER);
 	    etiqueta.setBounds(10, 174, 153, 19);
-	    JTextField campoContador = new JTextField(contador);
-	    campoContador.setOpaque(false);
-	    campoContador.setBounds(10, 203, 153, 19);
+	    
+	    campoContador = new JTextField("0");
+	    campoContador.setFont(new Font("Niagara Solid", Font.ITALIC, 17));
+	    campoContador.setHorizontalAlignment(SwingConstants.CENTER);
+	    campoContador.setBackground(new Color(138, 43, 226));
+	    //campoContador.setOpaque(false);
+	    campoContador.setBounds(10, 203, 153, 36);
 	    campoContador.setEditable(false); // Solo visual
+	    
 	    marcador.setLayout(null);
 	    marcador.add(etiqueta);
 	    marcador.add(campoContador);
@@ -275,42 +310,122 @@ public class Login extends JFrame {
 	    JLabel etiqueta_1 = new JLabel("Tiempo:");
 	    etiqueta_1.setFont(new Font("Wide Latin", Font.BOLD | Font.ITALIC, 12));
 	    etiqueta_1.setHorizontalAlignment(SwingConstants.CENTER);
-	    etiqueta_1.setBounds(10, 93, 153, 19);
+	    etiqueta_1.setBounds(10, 62, 153, 19);
 	    marcador.add(etiqueta_1);
 	    
-	    textField_2 = new JTextField(5);
+	    textField_2 = new JTextField("00:00:00");
+	    textField_2.setHorizontalAlignment(SwingConstants.CENTER);
 	    textField_2.setEditable(false);
 	    textField_2.setOpaque(false);
-	    textField_2.setBounds(10, 122, 153, 19);
+	    textField_2.setBounds(10, 91, 153, 50);
 	    marcador.add(textField_2);
 	    
-	    JButton btnNewButton_17 = new JButton("New button");
+	    JButton btnNewButton_17 = new JButton("Pausar");
+	    btnNewButton_17.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		timer.stop();
+	    	}
+	    });
 	    btnNewButton_17.setBounds(10, 275, 153, 21);
 	    marcador.add(btnNewButton_17);
 	    
-	    JButton btnNewButton_18 = new JButton("New button");
+	    JButton btnNewButton_18 = new JButton("Reanudar");
+	    btnNewButton_18.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    		timer.start();
+	    	}
+	    });
 	    btnNewButton_18.setBounds(10, 306, 153, 19);
 	    marcador.add(btnNewButton_18);
+	    
+	        
+	    // Reiniciar accion
 	    Reiniciar.addActionListener(new ActionListener() {
 	    		public void actionPerformed(ActionEvent e) {
-	    			
 	    		
-	    		/*JButton[] botones = {btnNewButton_1, btnNewButton_2, btnNewButton_3,btnNewButton_4, btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8, btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12,btnNewButton_13, btnNewButton_14, btnNewButton_15 };
-	    	            
-	    			for (JButton boton : botones) {
-	    	            boton.setText("");
-	    	            boton.setIcon(null);
-	    	            boton.setEnabled(true);
-	    			}
-	    	        turno = true;*/
-	    			JuegoBotones();
+	    			seg = 0;
+		            min = 0;
+		            hor = 0;
+		            textField_2.setText("00:00:00");
+		            actualizarCronometro();
+		            timer.restart();
+	    	        
+	    			contador=0;
+	    			campoContador.setText("0");
+	    			 List<String> valores = new ArrayList<>();
+
+	    			 // Agregar los números del 1 al 15 como Strings
+	    			 for (int i = 1; i <= 15; i++) {
+	    			     valores.add(String.valueOf(i));
+	    			 }
+	    	
+	    			
+	    			 valores.add("");
+	    			 Collections.shuffle(valores);
+	    			 
+	    			 // Arreglo de botones
+	    			    JButton[] []botones = {
+	    			        {btnNewButton_1, btnNewButton_2, btnNewButton_3, btnNewButton_4},
+	    			        {btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8},
+	    			        {btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12},
+	    			        {btnNewButton_13, btnNewButton_14, btnNewButton_15, btnNewButton_16}
+	    			    };
+	    			    
+	    			 // Agrega los valores a la matriz para reiniciar el juego
+	    			 int recorrido = 0; 
+	    			 for (int i = 0; i < botones.length; i++) {
+	    			     for (int j = 0; j < botones[i].length; j++) { 
+	    			         botones[i][j].setText(valores.get(recorrido)); 
+	    			         recorrido++;
+	    			     }
+	    			 }
+	    			 
 	    		}
 	    	});
 	    
 	    return marcador;
 	}
-	public JPanel JuegoBotones() {
+	
+	// Metodo para Verificar victoria
+	private void Orden() {
+	    int numEsperado = 1;
 	    
+	    JButton[] []botones = {
+		        {btnNewButton_1, btnNewButton_2, btnNewButton_3, btnNewButton_4},
+		        {btnNewButton_5, btnNewButton_6, btnNewButton_7, btnNewButton_8},
+		        {btnNewButton_9, btnNewButton_10, btnNewButton_11, btnNewButton_12},
+		        {btnNewButton_13, btnNewButton_14, btnNewButton_15, btnNewButton_16}
+		    };
+	    
+	    for (int i = 0; i < botones.length; i++) {
+	        for (int j = 0; j < botones[i].length; j++) {
+	            String texto = botones[i][j].getText();
+	            
+	            if (numEsperado <= 15) { 
+	                if (!texto.equals(String.valueOf(numEsperado))) {
+	                    return; 
+	                }
+	            } else { 
+	                if (!texto.equals("")) { 
+	                    return; 
+	                }
+	            }
+	            numEsperado++;
+	        }
+	    }
+	    JOptionPane.showMessageDialog(this, "¡Felicidades! Has completado el rompecabezas en " + textField_2.getText(), "¡Juego completado!", JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public JPanel JuegoBotones() {
+		
+		int confirmacion = JOptionPane.showConfirmDialog(null,"¿Deseas Iniciar eljuego?","Confirmación",JOptionPane.YES_NO_OPTION);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+        	if (timer == null) {
+        	    timer = new Timer(1000, e -> System.out.println("Timer funcionando")); // crea otro timer con un evento e
+        	}
+        	timer.start();
+        }
+	
 		JPanel juego = new JPanel();
 		juego.setBounds(0, 0, 622, 420);
 		juego.setBackground(new Color(153, 50, 204));
@@ -379,6 +494,8 @@ public class Login extends JFrame {
 				        botones[i][j].addActionListener(new ActionListener() {
 				            public void actionPerformed(ActionEvent e) {
 				            	
+				            	contador++;
+		                        campoContador.setText(String.valueOf(contador));
 				                // Verificar si alguno de los botones colindantes es el espacio vacío
 				            	 if (c1 > 0 && botones[c1-1][c2].getText().equals("")) { 
 				                     botones[c1-1][c2].setText(botones[c1][c2].getText());
@@ -396,6 +513,7 @@ public class Login extends JFrame {
 				                     botones[c1][c2+1].setText(botones[c1][c2].getText());
 				                     botones[c1][c2].setText("");
 				                 }
+				            	 Orden();
 			                 }
 				        });
 			     }
