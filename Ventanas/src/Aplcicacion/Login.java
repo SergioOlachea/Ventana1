@@ -361,7 +361,7 @@ public class Login extends JFrame {
 	    	
 	    			
 	    			 valores.add("");
-	    			 Collections.shuffle(valores);
+	    			 //Collections.shuffle(valores);
 	    			 
 	    			 // Arreglo de botones
 	    			    JButton[] []botones = {
@@ -476,7 +476,7 @@ public class Login extends JFrame {
 	
 			
 			 valores.add("");
-			 Collections.shuffle(valores);
+			 //Collections.shuffle(valores);
 			 
 			 // Agrega los valores a la matriz
 			 int recorrido = 0; 
