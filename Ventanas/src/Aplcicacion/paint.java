@@ -46,7 +46,7 @@ public class paint implements MouseListener, MouseMotionListener {
 	private JPanel panelContenido, panelHerramientas, panelLienzo;
     private JButton botonLimpiar;
     JMenuItem item1, item2, item3;
-    private JButton botonRectangulo, botonCirculo, botonTriangulo, botonLinea, botonHerramientas;
+    private JButton botonHerramienta,botonRectangulo, botonCirculo, botonTriangulo, botonLinea, botonHerramientas;
     private JSlider deslizadorTamanio;
     private JComboBox<String> herramientas, formas;
     private Color colorSeleccionado = Color.BLACK;
@@ -58,10 +58,23 @@ public class paint implements MouseListener, MouseMotionListener {
     private JLabel lblNewLabel_3;
     private PaintPanel panel_2;
     int tamaño;
-    private ArrayList<Point> puntos = new ArrayList<Point>();
-    
-    List<List<Point>> listaDePuntos = new ArrayList<>();
 
+    int X, Y;
+    private ArrayList<Point> puntos = new ArrayList<Point>();
+    List<List<Point>> listaDePuntos = new ArrayList<>();
+    
+    private ArrayList<point> puntosNuevos = new ArrayList<>();
+    private ArrayList<ArrayList<point>> listaDePuntosNuevos = new ArrayList<>();
+
+    int tipoFig = 2; // 2 = rectángulo, 3 = círculo, 4 = línea
+    boolean Click = false;
+    Point puntoInicio, puntoFinal;
+    int elemento=1;
+
+    List<figura> listaFiguras = new ArrayList<>();
+    
+    private List<JRadioButton> botonesDeColor = new ArrayList<>();
+    
     public static void main(String[] args) {
  		EventQueue.invokeLater(new Runnable() {
  			public void run() {
@@ -120,13 +133,18 @@ public class paint implements MouseListener, MouseMotionListener {
         panelHerramientas.add(herramientas);
         herramientas.addActionListener(e ->{
             String seleccion = (String) herramientas.getSelectedItem();
-            
+            if ("✏️ Lápiz".equals(seleccion) || "🖌️ Pincel".equals(seleccion)) {
+                elemento = 1;
+            }
             if ("🩹 Borrador".equals(seleccion)) {
-                colorSeleccionado = Color.WHITE; // Se cambia el color a blanco (borrador)
-            
+            	elemento = 6; 
+                colorSeleccionado = Color.WHITE;
+                for (JRadioButton boton : botonesDeColor) {
+                    boton.setSelected(false);
+                }
             }if ("🪣 Lata de pintura".equals(seleccion)) {
-            	panel_2.setBackground(colorSeleccionado); // Cambia el color de fondo del lienzo
-                panel_2.repaint(); // Repintar para aplicar cambios
+            	panel_2.setBackground(colorSeleccionado); 
+                panel_2.repaint(); 
             }
         });
             
@@ -135,17 +153,33 @@ public class paint implements MouseListener, MouseMotionListener {
         deslizadorTamanio = new JSlider(1, 20, 5);
         deslizadorTamanio.setBorder(new LineBorder(new Color(119, 136, 153), 2));
         panelHerramientas.add(deslizadorTamanio);
-        deslizadorTamanio.addChangeListener(e -> tamaño = deslizadorTamanio.getValue());
+        deslizadorTamanio.addChangeListener(e -> tamanioPincel  = deslizadorTamanio.getValue());
         
 
-
-     // Selector de formas geométricas
+        // Selector De Figuras
         String[] opcionesForma = {"📐 Figuras", "⬛ Rectángulo", "⚪ Círculo", "🔺 Triángulo", "➖ Línea" };
         
-        lblNewLabel = new JLabel("");
-        panelHerramientas.add(lblNewLabel);
+        botonHerramienta = new JButton("");
+        panelHerramientas.add(botonHerramienta);
         formas = new JComboBox<>(opcionesForma);
         panelHerramientas.add(formas);
+        formas.addActionListener(e ->{
+        	String seleccion = (String) formas.getSelectedItem();
+        
+        	 if ("⬛ Rectángulo".equals(seleccion)) {
+        		 elemento = 2;
+        	        tipoFig = 2;
+        	    } else if ("⚪ Círculo".equals(seleccion)) {
+        	    	elemento = 3;
+        	        tipoFig = 3;
+        	    } else if ("➖ Línea".equals(seleccion)) {
+        	    	elemento = 4;
+        	        tipoFig = 4;
+        	    } else if ("🔺 Triángulo".equals(seleccion)) {
+        	    	elemento = 5;
+        	        tipoFig = 5;
+        	    }
+        });
 
         // Colores
         JPanel coloresContenedor= new JPanel();
@@ -156,18 +190,21 @@ public class paint implements MouseListener, MouseMotionListener {
         
         for (Color color : colores) {
             JRadioButton botonColor = new JRadioButton();
-            
             botonColor.setBackground(color);
             botonColor.setOpaque(true);
             botonColor.setBorderPainted(false);
-        	botonColor.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                  colorSeleccionado = color; // Se actualiza el color seleccionado
-              }
-          });
-	        grupoColores.add(botonColor);
-	        coloresContenedor.add(botonColor);
-	        }
+            
+            botonColor.addItemListener(e -> {
+                if (e.getStateChange() == ItemEvent.SELECTED && elemento != 6) { // Solo si no es borrador
+                    colorSeleccionado = color;
+                }
+            });
+
+            grupoColores.add(botonColor);
+            coloresContenedor.add(botonColor);
+            botonesDeColor.add(botonColor); // Guardamos el botón
+        }
+
         
         lblNewLabel_1 = new JLabel("");
         panelHerramientas.add(lblNewLabel_1);
@@ -183,19 +220,18 @@ public class paint implements MouseListener, MouseMotionListener {
         botonLimpiar = new JButton("Limpiar");
         botonLimpiar.setBackground(new Color(255, 0, 0));
         
-        botonLimpiar.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e) {
-        		listaDePuntos.clear();
-                panel_2.repaint(); 
-        	
-        	}
+        botonLimpiar.addActionListener(e->{
+        	listaDePuntos.clear();
+        	listaDePuntosNuevos.clear();
+        	listaFiguras.clear(); 
+            puntosNuevos.clear();
+            panel_2.repaint();    
         });
         panelHerramientas.add(botonLimpiar);
         
 
         panelContenido.add(panelHerramientas, BorderLayout.WEST);
 
-        // Panel de dibujo (centro)
         panelLienzo = new JPanel() ;
           
         panelLienzo.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -209,104 +245,196 @@ public class paint implements MouseListener, MouseMotionListener {
  		panelContenido.add(panel_2, BorderLayout.CENTER);
  	}
  
- 	@Override
- 	public void mouseClicked(MouseEvent e) {
- 		// TODO Auto-generated method stub
- 		
- 	}
- 
- 	@Override
- 	public void mousePressed(MouseEvent e) {
- 		// TODO Auto-generated method stub
- 		
- 	}
- 
- 	@Override
- 	public void mouseReleased(MouseEvent e) {
- 		
- 		//crear una copia de los puntos
- 		ArrayList ArrList2  = (ArrayList)puntos.clone();
- 		
- 		//se guarda en el historial de dibujos
- 		listaDePuntos.add(ArrList2);
- 		
- 		//limpiamos el trazo actual
- 		puntos.clear();
- 		
- 		
- 	}
- 
- 	@Override
- 	public void mouseEntered(MouseEvent e) { 
- 		
- 	}
- 
- 	@Override
- 	public void mouseExited(MouseEvent e) { 
- 		
- 	}
- 
- 	@Override
- 	public void mouseDragged(MouseEvent e) {
- 		panel_2.repaint();
- 		
- 		puntos.add(e.getPoint());
- 		
- 	}
- 
- 	@Override
- 	public void mouseMoved(MouseEvent e) { 
- 		
- 	}
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (elemento == 2 || elemento == 3) { 
+            listaFiguras.add(new figura(e.getX(), e.getY(), 50, 50, colorSeleccionado, tipoFig, tamanioPincel));
+            panel_2.repaint();
+        } else if (elemento == 4) { 
+            if (!Click) {
+                puntoInicio = e.getPoint();
+                Click = true;
+            } else {
+                puntoFinal = e.getPoint();
+                listaFiguras.add(new figura(puntoInicio.x, puntoInicio.y, puntoFinal.x, puntoFinal.y, colorSeleccionado, tipoFig, tamanioPincel)); 
+                panel_2.repaint();
+                Click = false;
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {}
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        ArrayList<point> puntosTemp = new ArrayList<>(puntosNuevos);
+        listaDePuntosNuevos.add(puntosTemp);
+        puntosNuevos.clear();  
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+
+    @Override
+    public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if (elemento == 1) {
+            X = e.getX();
+            Y = e.getY();
+            
+            puntosNuevos.add(new point(X, Y, colorSeleccionado, tamanioPincel));
+            panel_2.repaint();
+        }if (elemento == 6) {
+            Iterator<figura> it = listaFiguras.iterator();
+            while (it.hasNext()) {
+                figura f = it.next();
+                if (f.contiene(e.getPoint())) {
+                    it.remove();
+                }
+            }
+            panel_2.repaint();
+        }if (elemento == 6) {
+            colorSeleccionado = Color.WHITE;  
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        panel_2.repaint();
+    }
+
+    class PaintPanel extends JPanel {
+        public PaintPanel() {
+            this.setBackground(Color.white);
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            Graphics2D g2 = (Graphics2D) g;
+
+            
+            if (puntosNuevos.size() > 1) {
+                for (int i = 1; i < puntosNuevos.size(); i++) {
+                    point p1 = puntosNuevos.get(i - 1);
+                    point p2 = puntosNuevos.get(i);
+                    p1.nuevoTrazo(p1.getX(), p1.getY(), p2.getX(), p2.getY(), g2);
+                }
+            }
+
+            for (List<point> trazo : listaDePuntosNuevos) {  
+                if (trazo.size() > 1) {
+                    for (int i = 1; i < trazo.size(); i++) {
+                        point p1 = trazo.get(i - 1);
+                        point p2 = trazo.get(i);
+                        p1.nuevoTrazo(p1.getX(), p1.getY(), p2.getX(), p2.getY(), g2);
+                    }
+                }
+            }
+
+           
+            for (figura f : listaFiguras) {  
+                g2.setColor(f.color);
+                g2.setStroke(new BasicStroke(f.grosor)); 
+                switch (f.tipo) {
+                    case 2:  // Rectángulo
+                        g2.drawRect(f.x, f.y, f.ancho, f.alto);
+                        break;
+                    case 3:  // Círculo
+                        g2.drawOval(f.x, f.y, f.ancho, f.alto);
+                        break;
+                    case 4:  // Línea
+                        g2.drawLine(f.x, f.y, f.ancho, f.alto);
+                        break;
+                    case 5: // Triángulo
+                        int[] xPoints = {f.x, f.x + f.ancho / 2, f.x - f.ancho / 2};
+                        int[] yPoints = {f.y, f.y + f.alto, f.y + f.alto};
+                        g2.drawPolygon(xPoints, yPoints, 3);
+                        break;
+                }
+            }
+            
+            g2.setStroke(new BasicStroke(tamaño));
+            g2.setColor(colorSeleccionado);
+
+            if (puntos.size() > 1) {
+                for (int i = 1; i < puntos.size(); i++) {
+                    Point p1 = puntos.get(i - 1);
+                    Point p2 = puntos.get(i);
+                    g2.drawLine(p1.x, p1.y, p2.x, p2.y);
+                }
+            }
+        }
+    }
+    }
+
+class point {
+    private int x, y;
+    private Color color;
+    private int grosor;
+
+    public point(int x, int y, Color color, int grosor) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.grosor = grosor;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public int getGrosor() {
+        return grosor;
+    }
+
+    public void nuevoTrazo(int p1X, int p1Y, int p2X, int p2Y, Graphics2D g2) {
+        g2.setColor(color);
+        g2.setStroke(new BasicStroke(grosor));
+        g2.drawLine(p1X, p1Y, p2X, p2Y);
+    }
+}
  	
- 	class PaintPanel extends JPanel{
- 		
- 		public PaintPanel()
- 		{
- 			this.setBackground(Color.white);
- 		}
- 		
- 		@Override
- 	   public void paintComponent(Graphics g) {
- 	       super.paintComponent(g);
- 	       
- 	       Graphics2D g2 = (Graphics2D) g; 
- 	       
- 	       
- 	       g2.setStroke(new BasicStroke(tamaño)); 
-	       g2.setColor(colorSeleccionado);
- 		   
- 	       //dibujar la trayectoria de puntos 
- 	       //solo cuando tengo más de 2 puntos
- 	       if(puntos.size()>1) {
- 	    	   
- 	    	   for (int i = 1; i < puntos.size(); i++) {
- 	    		   
- 	    		   Point p1 = puntos.get(i-1);
- 	    		   Point p2 = puntos.get(i);
- 	    		   
- 	    		   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
- 	    	   }
- 	    	   
- 	       }
- 	       
- 	       for (Iterator iterator = listaDePuntos.iterator(); iterator.hasNext();) {
- 			List<Point> trazo = (List<Point>) iterator.next();
- 			
- 				
- 				if(trazo.size()>1) {
- 		    	   
- 		    	   for (int i = 1; i < trazo.size(); i++) {
- 		    		   
- 		    		   Point p1 = trazo.get(i-1);
- 		    		   Point p2 = trazo.get(i);
- 		    		   
- 		    		   g2.drawLine(p1.x,p1.y,p2.x,p2.y);
- 		    	   }
- 		    	   
- 		       }
- 			
- 	       }
- 	   }
+class figura {
+    int x, y, ancho, alto;
+    Color color;
+    int grosor;
+    int tipo;  // Tipo de figura: 2 para rectángulo, 3 para círculo, 4 para línea
+
+    public figura(int x, int y, int ancho, int alto, Color color, int tipo, int grosor) {
+        this.x = x;
+        this.y = y;
+        this.ancho = ancho;
+        this.alto = alto;
+        this.color = color;
+        this.tipo = tipo;
+        this.grosor = grosor;
+    }
+    public boolean contiene(Point p) {
+        switch (tipo) {
+            case 2: // Rectángulo
+                return new java.awt.Rectangle(x, y, ancho, alto).contains(p);
+            case 3: // Círculo
+                return new java.awt.geom.Ellipse2D.Float(x, y, ancho, alto).contains(p);
+            case 4: // Línea
+                return new java.awt.geom.Line2D.Float(x, y, ancho, alto).ptSegDist(p) <= grosor;
+            case 5: // Triángulo
+                int[] xPoints = {x, x + ancho / 2, x - ancho / 2};
+                int[] yPoints = {y, y + alto, y + alto};
+                return new java.awt.Polygon(xPoints, yPoints, 3).contains(p);
+        }
+        return false;
     }
 }
