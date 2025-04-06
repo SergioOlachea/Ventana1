@@ -16,6 +16,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class juegoCuadro extends JFrame implements KeyListener  {
 
@@ -55,6 +57,11 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		JButton btnNewButton = new JButton("Reiniciar");
+		btnNewButton.addActionListener(e-> {
+			x=10;
+			y=10;
+			repaint();
+		});
 		panel_1.add(btnNewButton);
 		
 		JPanel panel_2 = new JPanel();
@@ -80,14 +87,50 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 			Graphics2D g2 = (Graphics2D) g;
 			g2.setColor(Color.LIGHT_GRAY);
 			g2.fillRect(x, y, 20, 20);
-			g2.drawRect(10, 10, 350, 350);
 		}
 	}
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
+		switch (key) {
+			case KeyEvent.VK_LEFT:
+				x -= 5;
+				System.out.println("presionada "+key);
+				break;
+			case KeyEvent.VK_RIGHT:
+				x += 5;
+				System.out.println("presionada "+key);
+				break;
+			case KeyEvent.VK_UP:
+				y -= 5;
+				System.out.println("presionada "+key);
+				break;
+			case KeyEvent.VK_DOWN:
+				y += 5;
+				System.out.println("presionada "+key);
+				break;
+			default:
+                System.out.println("Otra tecla presionada: " + key);
+        
+		}
 		
-		System.out.println(key);
+		
+		int ancho = panel.getWidth();
+		int alto = panel.getHeight();
+		int cuad=20;
+		if (x + cuad <= 0) {
+			x = ancho - cuad;
+		}
+		if (x >= ancho) {
+			x = 0;
+		}
+		if (y + cuad <= 0) {
+			y = alto - cuad;
+		}
+		if (y >= alto) {
+			y = 0;
+		}
+		panel.repaint();
 	}
 
 	public void keyReleased(KeyEvent e) {}
