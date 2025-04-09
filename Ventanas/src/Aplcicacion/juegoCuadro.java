@@ -1,12 +1,19 @@
 package Aplcicacion;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -21,6 +28,7 @@ import Aplcicacion.paint.PaintPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -32,7 +40,8 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 	private PaintPanel panel;
 	private Player player;
 	private Player sombra;
-	private Timer timer;
+	private Timer timer,timer2;
+	int ultimapresionada=0;
 	
 	private ArrayList<Player> obstaculos = new ArrayList<>();
 	Color rd=new Color(147,112,219);
@@ -115,6 +124,15 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 	       textField_2.setText(tiempo);
            }
         });
+		
+		timer2 = new Timer(40, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+           	 
+            	update();
+              System.out.println("mov");
+           }
+        });
 		addKeyListener((KeyListener) this);       
 		setFocusable(true);         
 		requestFocusInWindow();     
@@ -136,6 +154,7 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 		}
 		
 	}
+	
 
 	class PaintPanel extends JPanel {
 
@@ -157,34 +176,40 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		boolean movimiento = true;
 		timer.start();
+		timer2.start();
+		ultimapresionada= e.getKeyCode();
+	}
+	
+	void update(){
+		
+		boolean movimiento = true;
+		
 		
 		sombra.x = player.x;
 		sombra.y = player.y;
 		
-		switch (key) {
+		switch (ultimapresionada) {
 		
 		 case KeyEvent.VK_LEFT: 
 	        case KeyEvent.VK_A:     
-	            player.x -= 5;
+	            player.x -= 1;
 	            break;
 	        case KeyEvent.VK_RIGHT:
 	        case KeyEvent.VK_D:     
-	            player.x += 5;
+	            player.x += 1;
 	            break;
 	        case KeyEvent.VK_UP:    
 	        case KeyEvent.VK_W:     
-	            player.y -= 5;
+	            player.y -= 1;
 	            break;
 	        case KeyEvent.VK_DOWN:  
 	        case KeyEvent.VK_S:     
-	            player.y += 5;
+	            player.y += 1;
 	            break;
 			default:
-				System.out.println("Otra tecla presionada: " + key);
-				System.out.println(KeyEvent.getKeyText(key));
+				System.out.println("Otra tecla presionada: " + ultimapresionada);
+				System.out.println(KeyEvent.getKeyText(ultimapresionada));
 				break;
 		}
 	
@@ -193,6 +218,8 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 			if (player.colision(muro)) {
 				System.out.println("Chocaste");
 				movimiento = false;
+				timer2.stop();
+				ultimapresionada=0;
 				break;
 			} else {
 				System.out.println("Sigue");
@@ -222,8 +249,6 @@ public class juegoCuadro extends JFrame implements KeyListener  {
 	
 		panel.repaint();
 	}
-	
-
 	
 
 	public void keyReleased(KeyEvent e) {}
